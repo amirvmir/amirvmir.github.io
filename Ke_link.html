@@ -81,6 +81,72 @@
             box-shadow: 0 15px 35px rgba(8, 145, 178, 0.3);
         }
         
+        /* 10 سایت مهم */
+        .top-sites {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            margin-bottom: 40px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+            border: 2px solid #e0f2fe;
+        }
+        
+        .top-sites-title {
+            text-align: center;
+            color: #0c4a6e;
+            font-size: 1.5rem;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+        
+        .top-sites-grid {
+            display: grid;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 25px;
+        }
+        
+        .top-site-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s;
+        }
+        
+        .top-site-item:hover {
+            transform: translateY(-5px);
+        }
+        
+        .top-site-logo {
+            width: 70px;
+            height: 70px;
+            border-radius: 15px;
+            background: linear-gradient(135deg, #0891b2 0%, #7c3aed 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            color: white;
+            margin-bottom: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 3px solid white;
+        }
+        
+        .top-site-name {
+            color: #0c4a6e;
+            font-weight: 700;
+            font-size: 0.95rem;
+            text-align: center;
+            line-height: 1.4;
+        }
+        
         /* فیلتر و جستجو */
         .controls {
             display: flex;
@@ -117,24 +183,11 @@
             background: white;
         }
         
-        .categories-container {
-            position: relative;
-        }
-        
         .categories {
             display: flex;
             gap: 12px;
             flex-wrap: wrap;
-        }
-        
-        .main-categories {
-            max-height: 50px;
-            overflow: hidden;
-            transition: max-height 0.3s ease;
-        }
-        
-        .main-categories.expanded {
-            max-height: 200px;
+            align-items: center;
         }
         
         .category-btn {
@@ -163,9 +216,9 @@
             box-shadow: 0 5px 15px rgba(8, 145, 178, 0.2);
         }
         
-        .expand-categories {
+        .btn-expand {
             padding: 10px 22px;
-            background: #f8fafc;
+            background: #f1f5f9;
             border: 2px solid #e2e8f0;
             border-radius: 50px;
             cursor: pointer;
@@ -173,17 +226,27 @@
             color: #64748b;
             transition: all 0.3s;
             font-size: 0.95rem;
-            margin-top: 5px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
         }
         
-        .expand-categories:hover {
+        .btn-expand:hover {
             background: #e2e8f0;
             color: #475569;
+            border-color: #cbd5e1;
         }
         
-        .expand-categories.expanded {
-            background: #e2e8f0;
-            color: #475569;
+        .hidden-categories {
+            display: none;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 10px;
+            width: 100%;
+        }
+        
+        .hidden-categories.show {
+            display: flex;
         }
         
         /* کارت‌های لینک - طراحی فشرده و دوتایی */
@@ -357,17 +420,17 @@
             .links-container {
                 grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
             }
+            .top-sites-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
         
         @media (max-width: 900px) {
             .links-container {
                 grid-template-columns: 1fr;
             }
-            .main-categories {
-                max-height: none;
-            }
-            .expand-categories {
-                display: none;
+            .top-sites-grid {
+                grid-template-columns: repeat(2, 1fr);
             }
         }
         
@@ -383,6 +446,20 @@
             .link-card-footer { flex-direction: column; gap: 15px; align-items: stretch; }
             .domain { max-width: 100%; text-align: center; }
             .btn-visit { justify-content: center; }
+            .hidden-categories.show {
+                display: grid;
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .top-sites-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .top-sites-grid {
+                grid-template-columns: 1fr;
+            }
         }
         
         .empty-state {
@@ -418,6 +495,16 @@
             </button>
         </div>
 
+        <!-- 10 سایت مهم -->
+        <div class="top-sites">
+            <h2 class="top-sites-title">
+                <span>🏆</span> 10 سایت مهم ایرانی
+            </h2>
+            <div id="topSitesContainer" class="top-sites-grid">
+                <!-- سایت‌های مهم اینجا نمایش داده می‌شوند -->
+            </div>
+        </div>
+
         <!-- فیلتر و جستجو -->
         <div class="controls">
             <div class="search-box">
@@ -425,16 +512,24 @@
             </div>
             
             <div class="categories-container">
-                <div id="mainCategories" class="categories main-categories">
+                <div class="categories">
+                    <!-- 5 دسته‌بندی اول -->
                     <button class="category-btn active" onclick="filterCategory('all')">همه</button>
                     <button class="category-btn" onclick="filterCategory('shop')">خرید</button>
                     <button class="category-btn" onclick="filterCategory('entertainment')">سرگرمی</button>
                     <button class="category-btn" onclick="filterCategory('tech')">فناوری</button>
                     <button class="category-btn" onclick="filterCategory('education')">آموزش</button>
+                    
+                    <!-- دکمه ادامه -->
+                    <button class="btn-expand" onclick="toggleMoreCategories()">
+                        <span>⯆</span> ادامه
+                    </button>
                 </div>
-                <button id="expandCategories" class="expand-categories" onclick="toggleCategories()">
-                    ادامه دسته‌بندی‌ها
-                </button>
+                
+                <!-- دسته‌بندی‌های مخفی -->
+                <div id="hiddenCategories" class="hidden-categories">
+                    <!-- دسته‌بندی‌های دیگر اینجا به صورت پویا اضافه می‌شوند -->
+                </div>
             </div>
         </div>
 
@@ -475,6 +570,7 @@
         // ========================
         
         const links = [
+            // سایت‌های اصلی موجود
             {
                 title: "دیجی‌کالا",
                 url: "https://digikala.com",
@@ -708,14 +804,6 @@
                 logoImage: "https://khodrotak.com/favicon.ico"
             },
             {
-                title: "نشان",
-                url: "https://sherkat.ssaa.ir",
-                category: "government",
-                description: "سامانه ثبت شرکت‌ها و علائم تجاری",
-                logoText: "ن",
-                logoImage: "https://sherkat.ssaa.ir/favicon.ico"
-            },
-            {
                 title: "ایرانسل",
                 url: "https://irancell.ir",
                 category: "tech",
@@ -850,56 +938,501 @@
                 description: "پیام‌رسان ایرانی",
                 logoText: "ب",
                 logoImage: "https://bale.ai/favicon.ico"
+            },
+            // سایت‌های جدید اضافه شده (بدون تکراری)
+            {
+                title: "پنجره ملی دولت هوشمند",
+                url: "https://my.gov.ir/",
+                category: "government",
+                description: "پنجره ملی خدمات دولت هوشمند",
+                logoText: "پ",
+                logoImage: "https://my.gov.ir/favicon.ico"
+            },
+            {
+                title: "درگاه مجوزها",
+                url: "https://mojavez.ir/",
+                category: "government",
+                description: "پروانه، مجوز",
+                logoText: "د",
+                logoImage: "https://mojavez.ir/favicon.ico"
+            },
+            {
+                title: "املاک و اسکان",
+                url: "https://amlak.mrud.ir/",
+                category: "government",
+                description: "ملک، املاک",
+                logoText: "ا",
+                logoImage: "https://amlak.mrud.ir/favicon.ico"
+            },
+            {
+                title: "ستاد انتخابات",
+                url: "https://keshvar.moi.ir/",
+                category: "government",
+                description: "انتخابات",
+                logoText: "س",
+                logoImage: "https://keshvar.moi.ir/favicon.ico"
+            },
+            {
+                title: "تامین من",
+                url: "https://my.tamin.ir/page/app",
+                category: "insurance",
+                description: "سازمان تامین اجتماعی",
+                logoText: "ت",
+                logoImage: "https://my.tamin.ir/favicon.ico"
+            },
+            {
+                title: "شاد",
+                url: "https://shad.ir/",
+                category: "education",
+                description: "شبکه آموزشی دانش آموزی",
+                logoText: "ش",
+                logoImage: "https://shad.ir/favicon.ico"
+            },
+            {
+                title: "کالابرگ",
+                url: "https://mcls.gov.ir/",
+                category: "government",
+                description: "کالابرگ الکترونیکی",
+                logoText: "ک",
+                logoImage: "https://mcls.gov.ir/favicon.ico"
+            },
+            {
+                title: "کارت سوخت",
+                url: "https://fcs.niopdc.ir/",
+                category: "government",
+                description: "بنزین، کارت سوخت",
+                logoText: "ک",
+                logoImage: "https://fcs.niopdc.ir/favicon.ico"
+            },
+            {
+                title: "بیمه سلامت",
+                url: "https://ihio.gov.ir/",
+                category: "insurance",
+                description: "سازمان بیمه سلامت ایران",
+                logoText: "ب",
+                logoImage: "https://ihio.gov.ir/favicon.ico"
+            },
+            {
+                title: "پلیس (سخا)",
+                url: "https://sakha.epolice.ir/",
+                category: "government",
+                description: "سامانه خدمات الکترونیکی پلیس",
+                logoText: "پ",
+                logoImage: "https://sakha.epolice.ir/favicon.ico"
+            },
+            {
+                title: "خدمات قضایی",
+                url: "https://my.adliran.ir/",
+                category: "legal",
+                description: "اداره کل حقوقی قوه قضائیه",
+                logoText: "خ",
+                logoImage: "https://my.adliran.ir/favicon.ico"
+            },
+            {
+                title: "سامانه جامع تجارت",
+                url: "https://ntsw.ir/",
+                category: "commerce",
+                description: "سامانه ملی تجارت خارجی",
+                logoText: "س",
+                logoImage: "https://ntsw.ir/favicon.ico"
+            },
+            {
+                title: "مخزن ملی منابع متن باز",
+                url: "https://repo.ito.gov.ir/",
+                category: "tech",
+                description: "مخزن ملی نرم افزارهای متن باز",
+                logoText: "م",
+                logoImage: "https://repo.ito.gov.ir/favicon.ico"
+            },
+            {
+                title: "موتور جستجوی ذره‌بین",
+                url: "https://zarebin.ir/",
+                category: "search",
+                description: "موتور جستجوی ایرانی",
+                logoText: "ذ",
+                logoImage: "https://zarebin.ir/favicon.ico"
+            },
+            {
+                title: "موتور جستجوی گردو",
+                url: "https://gerdoo.me/",
+                category: "search",
+                description: "موتور جستجوی ایرانی",
+                logoText: "گ",
+                logoImage: "https://gerdoo.me/favicon.ico"
+            },
+            {
+                title: "ایمیل ملی",
+                url: "https://mail.ir/",
+                category: "tech",
+                description: "سرویس ایمیل ملی",
+                logoText: "ا",
+                logoImage: "https://mail.ir/favicon.ico"
+            },
+            {
+                title: "همراه من",
+                url: "https://my.irancell.ir/",
+                category: "tech",
+                description: "اپراتور همراه اول",
+                logoText: "ه",
+                logoImage: "https://my.irancell.ir/favicon.ico"
+            },
+            {
+                title: "مایکت",
+                url: "https://myket.ir/",
+                category: "appstore",
+                description: "فروشگاه اپلیکیشن ایرانی",
+                logoText: "م",
+                logoImage: "https://myket.ir/favicon.ico"
+            },
+            {
+                title: "ایرانسل من",
+                url: "https://my.irancell.ir/",
+                category: "tech",
+                description: "اپراتور ایرانسل",
+                logoText: "ا",
+                logoImage: "https://my.irancell.ir/favicon.ico"
+            },
+            {
+                title: "آسان پرداخت (آپ)",
+                url: "https://asanpardakht.ir/",
+                category: "finance",
+                description: "درگاه پرداخت الکترونیکی",
+                logoText: "آ",
+                logoImage: "https://asanpardakht.ir/favicon.ico"
+            },
+            {
+                title: "اسنپ فود",
+                url: "https://snappfood.ir/",
+                category: "food",
+                description: "سفارش آنلاین غذا",
+                logoText: "ا",
+                logoImage: "https://snappfood.ir/favicon.ico"
+            },
+            {
+                title: "ترب",
+                url: "https://torob.com/",
+                category: "shop",
+                description: "جستجوی قیمت کالا",
+                logoText: "ت",
+                logoImage: "https://torob.com/favicon.ico"
+            },
+            {
+                title: "آنتن",
+                url: "https://www.anten.ir/",
+                category: "sports",
+                description: "فوتبال، مسابقات ورزشی",
+                logoText: "آ",
+                logoImage: "https://www.anten.ir/favicon.ico"
+            },
+            {
+                title: "برنامه 724",
+                url: "https://724.ir/",
+                category: "service",
+                description: "خدمات آنلاین",
+                logoText: "ب",
+                logoImage: "https://724.ir/favicon.ico"
+            },
+            {
+                title: "هف هشتاد",
+                url: "https://780.ir/",
+                category: "service",
+                description: "خدمات آنلاین",
+                logoText: "ه",
+                logoImage: "https://780.ir/favicon.ico"
+            },
+            {
+                title: "تاپ",
+                url: "https://top.ir/",
+                category: "service",
+                description: "خدمات آنلاین",
+                logoText: "ت",
+                logoImage: "https://top.ir/favicon.ico"
+            },
+            {
+                title: "شهرزاد",
+                url: "https://my.tehran.ir/",
+                category: "government",
+                description: "شهرداری تهران",
+                logoText: "ش",
+                logoImage: "https://my.tehran.ir/favicon.ico"
+            },
+            {
+                title: "پلیس من",
+                url: "https://police-man.ir/",
+                category: "government",
+                description: "گواهینامه، خودرو",
+                logoText: "پ",
+                logoImage: "https://police-man.ir/favicon.ico"
+            },
+            {
+                title: "تیوال",
+                url: "https://www.tiwall.com/",
+                category: "entertainment",
+                description: "خرید بلیت تئاتر و سینما",
+                logoText: "ت",
+                logoImage: "https://www.tiwall.com/favicon.ico"
+            },
+            {
+                title: "سینما تیکت",
+                url: "http://cinematicket.com/",
+                category: "entertainment",
+                description: "خرید بلیت سینما",
+                logoText: "س",
+                logoImage: "http://cinematicket.com/favicon.ico"
+            },
+            {
+                title: "موتور جستجوی ریسمون",
+                url: "https://www.rismoon.com/",
+                category: "search",
+                description: "موتور جستجوی ایرانی",
+                logoText: "ر",
+                logoImage: "https://www.rismoon.com/favicon.ico"
+            },
+            {
+                title: "شادبین",
+                url: "https://shaadbin.ir/",
+                category: "education",
+                description: "موتور جستجوی کودکان",
+                logoText: "ش",
+                logoImage: "https://shaadbin.ir/favicon.ico"
+            },
+            {
+                title: "دستیار هوشمند فارسی",
+                url: "https://targoman.ir",
+                category: "ai",
+                description: "ترجمه هوشمند",
+                logoText: "د",
+                logoImage: "https://targoman.ir/favicon.ico"
+            },
+            {
+                title: "هوش مصنوعی ویرا",
+                url: "https://ivira.ai",
+                category: "ai",
+                description: "هوش مصنوعی فارسی",
+                logoText: "و",
+                logoImage: "https://ivira.ai/favicon.ico"
+            },
+            {
+                title: "هوش مصنوعی بوف",
+                url: "https://boofai.com",
+                category: "ai",
+                description: "هوش مصنوعی فارسی",
+                logoText: "ب",
+                logoImage: "https://boofai.com/favicon.ico"
+            },
+            {
+                title: "هوش مصنوعی هوش‌زی",
+                url: "https://hooshzy.ir",
+                category: "ai",
+                description: "هوش مصنوعی فارسی",
+                logoText: "ه",
+                logoImage: "https://hooshzy.ir/favicon.ico"
+            },
+            {
+                title: "هوش مصنوعی اوکیان",
+                url: "https://okian.ai",
+                category: "ai",
+                description: "هوش مصنوعی فارسی",
+                logoText: "ا",
+                logoImage: "https://okian.ai/favicon.ico"
+            },
+            {
+                title: "مترجم فرازین",
+                url: "https://faraazin.ir/",
+                category: "ai",
+                description: "مترجم هوشمند",
+                logoText: "ف",
+                logoImage: "https://faraazin.ir/favicon.ico"
+            },
+            {
+                title: "آرشیو ملی منابع متن باز",
+                url: "https://archive.ito.gov.ir",
+                category: "tech",
+                description: "آرشیو منابع متن باز",
+                logoText: "آ",
+                logoImage: "https://archive.ito.gov.ir/favicon.ico"
+            },
+            {
+                title: "هوش مصنوعی یار",
+                url: "https://chat.yarai.ir/",
+                category: "ai",
+                description: "هوش مصنوعی فارسی",
+                logoText: "ی",
+                logoImage: "https://chat.yarai.ir/favicon.ico"
+            },
+            {
+                title: "آیتول",
+                url: "https://itoll.com/",
+                category: "service",
+                description: "خدمات آنلاین",
+                logoText: "آ",
+                logoImage: "https://itoll.com/favicon.ico"
+            },
+            {
+                title: "کلاد",
+                url: "https://cloud.ir/",
+                category: "tech",
+                description: "سرویس ابری",
+                logoText: "ک",
+                logoImage: "https://cloud.ir/favicon.ico"
+            },
+            {
+                title: "آسیاتک",
+                url: "https://asiatech.ir/",
+                category: "tech",
+                description: "ارائه دهنده خدمات اینترنتی",
+                logoText: "آ",
+                logoImage: "https://asiatech.ir/favicon.ico"
+            },
+            {
+                title: "CDN",
+                url: "https://cdn.ir/",
+                category: "tech",
+                description: "شبکه تحویل محتوا",
+                logoText: "C",
+                logoImage: "https://cdn.ir/favicon.ico"
+            },
+            {
+                title: "تپسی دکتر",
+                url: "https://tapsi.doctor/app",
+                category: "health",
+                description: "ویزیت پزشک در منزل",
+                logoText: "ت",
+                logoImage: "https://tapsi.doctor/favicon.ico"
+            },
+            {
+                title: "ازکی",
+                url: "https://www.azki.com",
+                category: "insurance",
+                description: "مقایسه و خرید بیمه",
+                logoText: "ا",
+                logoImage: "https://www.azki.com/favicon.ico"
+            },
+            {
+                title: "نرم افزار CRM دیدار",
+                url: "https://www.didar.me",
+                category: "tech",
+                description: "نرم افزار مدیریت ارتباط با مشتری",
+                logoText: "د",
+                logoImage: "https://www.didar.me/favicon.ico"
             }
+        ];
+        
+        // 10 سایت مهم برای نمایش در بخش بالا
+        const topSites = [
+            "دیجی‌کالا",
+            "اسنپ",
+            "دیوار",
+            "آپارات",
+            "کافه‌بازار",
+            "بانک ملی",
+            "علی‌بابا",
+            "ورزش ۳",
+            "پنجره ملی دولت هوشمند",
+            "شاد"
         ];
         
         // ========================
         // پایان بخش داده‌ها
         // ========================
 
-        // ایجاد دسته‌بندی‌های باقی‌مانده
-        let allCategories = ['all', 'shop', 'entertainment', 'tech', 'education', 'news', 'government', 'sports', 'travel', 'health', 'bank', 'communication', 'automotive', 'shipping', 'legal', 'map', 'crypto', 'insurance', 'weather', 'culture'];
-        
-        // تابع برای نمایش دسته‌بندی‌های باقی‌مانده
-        function loadRemainingCategories() {
-            const mainCategories = document.getElementById('mainCategories');
-            const existingButtons = mainCategories.querySelectorAll('.category-btn');
-            const existingCategories = Array.from(existingButtons).map(btn => btn.getAttribute('onclick').match(/'([^']+)'/)[1]);
+        // تعریف دسته‌بندی‌های موجود
+        const allCategories = [
+            {id: 'all', name: 'همه'},
+            {id: 'shop', name: 'خرید'},
+            {id: 'entertainment', name: 'سرگرمی'},
+            {id: 'tech', name: 'فناوری'},
+            {id: 'education', name: 'آموزش'},
+            {id: 'news', name: 'اخبار'},
+            {id: 'government', name: 'دولتی'},
+            {id: 'sports', name: 'ورزش'},
+            {id: 'travel', name: 'سفر'},
+            {id: 'health', name: 'سلامت'},
+            {id: 'bank', name: 'بانک'},
+            {id: 'communication', name: 'ارتباطات'},
+            {id: 'automotive', name: 'خودرو'},
+            {id: 'shipping', name: 'پست و حمل'},
+            {id: 'legal', name: 'حقوقی'},
+            {id: 'map', name: 'نقشه'},
+            {id: 'crypto', name: 'ارز دیجیتال'},
+            {id: 'insurance', name: 'بیمه'},
+            {id: 'weather', name: 'هواشناسی'},
+            {id: 'culture', name: 'فرهنگ'},
+            {id: 'commerce', name: 'تجارت'},
+            {id: 'search', name: 'جستجو'},
+            {id: 'appstore', name: 'اپ‌استور'},
+            {id: 'finance', name: 'مالی'},
+            {id: 'food', name: 'غذا'},
+            {id: 'service', name: 'خدمات'},
+            {id: 'ai', name: 'هوش مصنوعی'}
+        ];
+
+        // تابع نمایش/بستن دسته‌بندی‌های بیشتر
+        function toggleMoreCategories() {
+            const hiddenContainer = document.getElementById('hiddenCategories');
+            const expandBtn = document.querySelector('.btn-expand');
             
-            allCategories.forEach(category => {
-                if (!existingCategories.includes(category) && category !== 'all') {
-                    const button = document.createElement('button');
-                    button.className = 'category-btn';
-                    button.textContent = getCategoryName(category);
-                    button.setAttribute('onclick', `filterCategory('${category}')`);
-                    mainCategories.appendChild(button);
+            if (hiddenContainer.classList.contains('show')) {
+                hiddenContainer.classList.remove('show');
+                expandBtn.innerHTML = '<span>⯆</span> ادامه';
+            } else {
+                if (hiddenContainer.children.length === 0) {
+                    loadHiddenCategories();
                 }
+                hiddenContainer.classList.add('show');
+                expandBtn.innerHTML = '<span>⯅</span> بستن';
+            }
+        }
+
+        // بارگذاری دسته‌بندی‌های مخفی
+        function loadHiddenCategories() {
+            const hiddenContainer = document.getElementById('hiddenCategories');
+            hiddenContainer.innerHTML = '';
+            
+            allCategories.slice(5).forEach(category => {
+                const button = document.createElement('button');
+                button.className = 'category-btn';
+                button.textContent = category.name;
+                button.setAttribute('onclick', `filterCategory('${category.id}')`);
+                hiddenContainer.appendChild(button);
             });
         }
-        
-        // تابع نمایش/بستن دسته‌بندی‌ها
-        function toggleCategories() {
-            const mainCategories = document.getElementById('mainCategories');
-            const expandBtn = document.getElementById('expandCategories');
+
+        // نمایش 10 سایت مهم
+        function displayTopSites() {
+            const container = document.getElementById('topSitesContainer');
+            container.innerHTML = '';
             
-            if (mainCategories.classList.contains('expanded')) {
-                mainCategories.classList.remove('expanded');
-                expandBtn.textContent = 'ادامه دسته‌بندی‌ها';
-                expandBtn.classList.remove('expanded');
-            } else {
-                // بارگذاری دسته‌بندی‌های باقی‌مانده
-                if (mainCategories.querySelectorAll('.category-btn').length <= 6) {
-                    loadRemainingCategories();
+            topSites.forEach(siteName => {
+                const site = links.find(s => s.title === siteName);
+                if (site) {
+                    const item = document.createElement('a');
+                    item.className = 'top-site-item';
+                    item.href = site.url;
+                    item.target = '_blank';
+                    item.rel = 'noopener';
+                    
+                    let logoStyle = '';
+                    if (site.logoImage) {
+                        logoStyle = `background-image: url('${site.logoImage}');`;
+                    }
+                    
+                    item.innerHTML = `
+                        <div class="top-site-logo" style="${logoStyle}">
+                            ${site.logoImage ? '' : site.logoText || site.title.charAt(0)}
+                        </div>
+                        <div class="top-site-name">${site.title}</div>
+                    `;
+                    
+                    container.appendChild(item);
                 }
-                mainCategories.classList.add('expanded');
-                expandBtn.textContent = 'بستن دسته‌بندی‌ها';
-                expandBtn.classList.add('expanded');
-            }
+            });
         }
 
         // نمایش اولیه سایت‌ها
         displayLinks(links);
         updateStats();
+        displayTopSites();
 
         // تابع نمایش سایت‌ها
         function displayLinks(linksArray) {
@@ -923,7 +1456,6 @@
                 const card = document.createElement('div');
                 card.className = 'link-card';
                 
-                // تعیین استایل لوگو
                 let logoStyle = '';
                 if (link.logoImage) {
                     logoStyle = `background-image: url('${link.logoImage}'); background-color: white;`;
@@ -1001,6 +1533,13 @@
                 'insurance': 'بیمه',
                 'weather': 'هواشناسی',
                 'culture': 'فرهنگ',
+                'commerce': 'تجارت',
+                'search': 'جستجو',
+                'appstore': 'اپ‌استور',
+                'finance': 'مالی',
+                'food': 'غذا',
+                'service': 'خدمات',
+                'ai': 'هوش مصنوعی',
                 'other': 'سایر'
             };
             return categories[category] || 'سایر';
@@ -1009,11 +1548,9 @@
         function updateStats() {
             document.getElementById('totalSites').textContent = links.length;
             
-            // تعداد دسته‌بندی‌های منحصر به فرد
             const uniqueCategories = [...new Set(links.map(link => link.category))];
             document.getElementById('categoryCount').textContent = uniqueCategories.length;
             
-            // زمان به‌روزرسانی
             const now = new Date();
             const dateString = now.toLocaleDateString('fa-IR', {
                 year: 'numeric',
@@ -1027,4 +1564,4 @@
         updateStats();
     </script>
 </body>
-</html>
+    </html>
