@@ -28,18 +28,13 @@
         [data-theme="dark"] {
             --primary: #FF8787;
             --secondary: #45B7AF;
-            --light: #16213E; /* Adjusted background for dark mode */
+            --light: #16213E;
             --text-main: #F7FFF7;
             --card-bg: #1A1A2E;
             --shadow: 0 10px 20px rgba(0,0,0,0.5);
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            transition: background-color 0.3s ease, color 0.3s ease;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; transition: background-color 0.3s ease, color 0.3s ease; }
 
         body {
             font-family: var(--font-body);
@@ -52,263 +47,112 @@
         /* --- Utility Classes --- */
         .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
         .btn {
-            padding: 10px 25px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-family: var(--font-heading);
-            font-size: 1rem;
+            padding: 10px 25px; border: none; border-radius: 50px; cursor: pointer;
+            font-family: var(--font-heading); font-size: 1rem;
             transition: transform 0.2s, box-shadow 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 10px;
+            display: inline-flex; align-items: center; gap: 10px;
         }
         .btn:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.2); }
         .btn-primary { background-color: var(--primary); color: white; }
         .btn-secondary { background-color: var(--secondary); color: white; }
         .btn-accent { background-color: var(--accent); color: var(--dark); }
         .section-title {
-            font-family: var(--font-heading);
-            font-size: 2.5rem;
-            text-align: center;
-            margin-bottom: 2rem;
-            color: var(--primary);
-            position: relative;
+            font-family: var(--font-heading); font-size: 2.5rem; text-align: center;
+            margin-bottom: 2rem; color: var(--primary);
         }
         .hidden { display: none !important; }
 
         /* --- Header --- */
         header {
-            background-color: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            position: fixed;
-            width: 100%;
-            top: 0;
-            z-index: 1000;
+            background-color: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px);
+            position: fixed; width: 100%; top: 0; z-index: 1000;
             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
         }
         [data-theme="dark"] header { background-color: rgba(26, 26, 46, 0.95); }
 
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            height: 70px;
-        }
-
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.8rem;
-            color: var(--primary);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; height: 70px; }
+        .logo { font-family: var(--font-heading); font-size: 1.8rem; color: var(--primary); display: flex; align-items: center; gap: 10px; }
         .logo i { animation: bounce 2s infinite; }
-
         .nav-menu { display: flex; list-style: none; gap: 20px; }
-        .nav-link {
-            text-decoration: none;
-            color: var(--text-main);
-            font-weight: 700;
-            position: relative;
-            cursor: pointer;
-        }
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 3px;
-            background: var(--secondary);
-            transition: width 0.3s;
-        }
-        .nav-link:hover::after { width: 100%; }
-
-        .header-actions { display: flex; gap: 15px; align-items: center; }
+        .nav-link { text-decoration: none; color: var(--text-main); font-weight: 700; cursor: pointer; }
         .theme-toggle { background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--text-main); }
 
-        /* --- Hero Section --- */
+        /* --- Hero --- */
         .hero {
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-            padding-top: 70px;
+            height: 100vh; display: flex; align-items: center; justify-content: center;
+            text-align: center; position: relative; overflow: hidden; padding-top: 70px;
         }
-        
-        /* Animated Background Elements */
-        .hero-bg-shape {
-            position: absolute;
-            border-radius: 50%;
-            opacity: 0.1;
-            z-index: -1;
-            animation: float 6s ease-in-out infinite;
-        }
+        .hero-bg-shape { position: absolute; border-radius: 50%; opacity: 0.1; z-index: -1; animation: float 6s ease-in-out infinite; }
         .shape-1 { width: 300px; height: 300px; background: var(--primary); top: 10%; left: -50px; }
         .shape-2 { width: 200px; height: 200px; background: var(--secondary); bottom: 20%; right: -30px; animation-delay: 2s; }
-        .shape-3 { width: 150px; height: 150px; background: var(--accent); top: 20%; right: 20%; animation-delay: 4s; }
-
-        .hero-content h1 {
-            font-size: 4rem;
-            font-family: var(--font-heading);
-            margin-bottom: 20px;
-            line-height: 1.2;
-        }
-        .hero-subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 40px;
-            min-height: 1.5em;
-            color: var(--secondary);
-            font-weight: bold;
-        }
-        .hero-buttons { display: flex; justify-content: center; gap: 20px; }
+        
+        .hero-content h1 { font-size: 4rem; font-family: var(--font-heading); margin-bottom: 20px; }
+        .hero-subtitle { font-size: 1.5rem; margin-bottom: 40px; min-height: 1.5em; color: var(--secondary); font-weight: bold; }
 
         /* --- Games Section --- */
-        .games-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 30px;
-            padding: 50px 0;
-        }
+        .games-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px; padding: 20px 0; }
         .game-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 20px;
-            text-align: center;
-            box-shadow: var(--shadow);
-            border: 2px solid transparent;
-            transition: all 0.3s;
-            position: relative;
-            overflow: hidden;
+            background: var(--card-bg); border-radius: 20px; padding: 20px; text-align: center;
+            box-shadow: var(--shadow); border: 2px solid transparent; transition: all 0.3s;
         }
         .game-card:hover { transform: translateY(-10px); border-color: var(--secondary); }
         .game-icon { font-size: 3rem; margin-bottom: 15px; color: var(--accent); }
-        .game-card h3 { margin-bottom: 10px; font-family: var(--font-game); font-size: 1.2rem; }
-        .game-card p { margin-bottom: 20px; font-size: 0.9rem; opacity: 0.8; }
 
-        /* Game Board Area (Modal/Overlay) */
+        /* Game Arena */
         .game-arena {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 30px;
-            margin-top: 30px;
-            box-shadow: var(--shadow);
-            text-align: center;
-            display: none; /* Hidden by default */
+            background: var(--card-bg); border-radius: 20px; padding: 30px; margin-top: 30px;
+            box-shadow: var(--shadow); text-align: center; display: none;
         }
         .game-arena.active { display: block; animation: fadeIn 0.5s; }
-        
-        /* Tic Tac Toe Specific */
-        .ttt-board {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-            max-width: 300px;
-            margin: 20px auto;
-        }
+
+        /* Specific Game Styles */
+        /* Tic Tac Toe */
+        .ttt-board { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; max-width: 300px; margin: 20px auto; }
         .ttt-cell {
-            background: var(--light);
-            height: 100px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2.5rem;
-            font-family: var(--font-game);
-            cursor: pointer;
-            border-radius: 10px;
-            border: 2px solid var(--secondary);
+            background: var(--light); height: 80px; display: flex; align-items: center; justify-content: center;
+            font-size: 2rem; font-family: var(--font-game); cursor: pointer; border-radius: 10px; border: 2px solid var(--secondary);
         }
-        .ttt-cell.x { color: var(--primary); }
-        .ttt-cell.o { color: var(--accent); }
+        .ttt-cell.x { color: var(--primary); } .ttt-cell.o { color: var(--accent); }
 
-        /* --- Jokes Section --- */
+        /* Memory Game */
+        .memory-grid {
+            display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; max-width: 400px; margin: 20px auto;
+        }
+        .memory-card {
+            aspect-ratio: 1; background: var(--secondary); border-radius: 8px; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 2rem;
+            transform-style: preserve-3d; transition: transform 0.5s;
+        }
+        .memory-card.flipped { background: var(--light); border: 2px solid var(--primary); transform: rotateY(180deg); }
+
+        /* Typing Game */
+        .typing-area { max-width: 600px; margin: 0 auto; }
+        .typing-text { font-size: 1.2rem; margin-bottom: 20px; line-height: 1.8; background: var(--light); padding: 15px; border-radius: 10px; }
+        .typing-input { width: 100%; padding: 15px; font-size: 1.1rem; border-radius: 10px; border: 2px solid var(--secondary); font-family: inherit; }
+
+        /* Snake Game */
+        #snakeCanvas { background: var(--dark); border: 5px solid var(--accent); border-radius: 5px; margin: 0 auto; display: block; }
+
+        /* --- Jokes & Riddles --- */
         .joke-card {
-            background: var(--card-bg);
-            border-radius: 20px;
-            padding: 40px;
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-            box-shadow: var(--shadow);
-            position: relative;
+            background: var(--card-bg); border-radius: 20px; padding: 40px; text-align: center;
+            max-width: 600px; margin: 0 auto 30px; box-shadow: var(--shadow); position: relative;
         }
-        .joke-content { font-size: 1.5rem; margin-bottom: 30px; line-height: 1.6; }
         .joke-category {
-            position: absolute;
-            top: -15px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--accent);
-            padding: 5px 20px;
-            border-radius: 20px;
-            font-weight: bold;
-            color: var(--dark);
+            position: absolute; top: -15px; left: 50%; transform: translateX(-50%);
+            background: var(--accent); padding: 5px 20px; border-radius: 20px; font-weight: bold; color: var(--dark);
         }
-
-        /* --- Videos & Gallery --- */
-        .media-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
-        }
-        .media-card {
-            background: var(--card-bg);
-            border-radius: 15px;
-            overflow: hidden;
-            box-shadow: var(--shadow);
-        }
-        .media-placeholder {
-            height: 200px;
-            background: #ddd;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #666;
-            font-size: 3rem;
-        }
-        .media-info { padding: 15px; }
-
-        /* --- Footer --- */
-        footer {
-            background: var(--dark);
-            color: white;
-            padding: 50px 0 20px;
-            margin-top: 50px;
-        }
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 40px;
-            margin-bottom: 30px;
-        }
-        .footer-col h4 { color: var(--accent); margin-bottom: 20px; font-family: var(--font-heading); }
-        .footer-col ul { list-style: none; }
-        .footer-col ul li { margin-bottom: 10px; }
-        .footer-col ul li a { color: #ccc; text-decoration: none; }
-        .social-icons a { color: white; margin-right: 15px; font-size: 1.5rem; }
 
         /* --- Animations --- */
-        @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
-        }
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
-            40% { transform: translateY(-10px); }
-            60% { transform: translateY(-5px); }
-        }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } }
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         /* Responsive */
         @media (max-width: 768px) {
             .hero-content h1 { font-size: 2.5rem; }
-            .nav-menu { display: none; } /* Simplified for mobile */
-            .mobile-menu-btn { display: block; }
+            .nav-menu { display: none; } 
+            .memory-grid { gap: 5px; }
         }
     </style>
 </head>
@@ -316,31 +160,22 @@
 
     <header>
         <div class="container nav-container">
-            <div class="logo">
-                <i class="fas fa-gamepad"></i>
-                <span>FunZone</span>
-            </div>
+            <div class="logo"><i class="fas fa-gamepad"></i><span>FunZone</span></div>
             <ul class="nav-menu">
                 <li onclick="showSection('home')" class="nav-link">خانه</li>
                 <li onclick="showSection('games')" class="nav-link">بازی‌ها</li>
-                <li onclick="showSection('jokes')" class="nav-link">جوک‌دونی</li>
+                <li onclick="showSection('jokes')" class="nav-link">خنده و معما</li>
                 <li onclick="showSection('videos')" class="nav-link">ویدیوها</li>
-                <li onclick="showSection('challenges')" class="nav-link">چالش‌ها</li>
             </ul>
-            <div class="header-actions">
-                <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
-                <button class="btn btn-primary" style="font-size:0.9rem;">ورود</button>
-            </div>
+            <button class="theme-toggle" id="themeBtn"><i class="fas fa-moon"></i></button>
         </div>
     </header>
 
-    <main id="main-content">
+    <main>
 
         <section id="home" class="hero">
             <div class="hero-bg-shape shape-1"></div>
             <div class="hero-bg-shape shape-2"></div>
-            <div class="hero-bg-shape shape-3"></div>
-            
             <div class="container hero-content">
                 <h1>دنیای سرگرمی<br><span style="color:var(--primary)">بی‌نهایت</span></h1>
                 <div class="hero-subtitle" id="typing-text"></div>
@@ -355,246 +190,200 @@
             <h2 class="section-title">منطقه بازی‌ها</h2>
             
             <div id="active-game-area" class="game-arena">
-                <div style="display:flex; justify-content:space-between; margin-bottom:20px;">
-                    <h3 id="game-title">عنوان بازی</h3>
-                    <button class="btn btn-accent" onclick="closeGame()">خروج از بازی</button>
+                <div style="display:flex; justify-content:space-between; margin-bottom:20px; align-items:center;">
+                    <h3 id="game-title" style="margin:0;">عنوان بازی</h3>
+                    <button class="btn btn-accent" onclick="closeGame()" style="font-size:0.8rem; padding: 5px 15px;">بازگشت به منو</button>
                 </div>
                 <div id="game-board-content"></div>
-                <div id="game-status" style="margin-top:20px; font-weight:bold;"></div>
+                <div id="game-status" style="margin-top:20px; font-weight:bold; color: var(--primary);"></div>
             </div>
 
             <div class="games-grid" id="games-list">
                 <div class="game-card">
                     <div class="game-icon"><i class="fas fa-times"></i></div>
                     <h3>دوز (Tic Tac Toe)</h3>
-                    <p>بازی کلاسیک دوز. کامپیوتر را شکست بده!</p>
                     <button class="btn btn-secondary" onclick="loadGame('tictactoe')">بازی کن</button>
                 </div>
                 <div class="game-card">
                     <div class="game-icon"><i class="fas fa-question"></i></div>
                     <h3>حدس عدد</h3>
-                    <p>یک عدد بین ۱ تا ۱۰۰ را حدس بزنید.</p>
                     <button class="btn btn-secondary" onclick="loadGame('guess')">بازی کن</button>
                 </div>
                 <div class="game-card">
                     <div class="game-icon"><i class="fas fa-brain"></i></div>
                     <h3>حافظه تصویری</h3>
-                    <p>کارت‌های مشابه را پیدا کن.</p>
-                    <button class="btn btn-secondary" onclick="alert('به زودی اضافه می‌شود!')">بازی کن</button>
+                    <button class="btn btn-secondary" onclick="loadGame('memory')">بازی کن</button>
                 </div>
                 <div class="game-card">
                     <div class="game-icon"><i class="fas fa-keyboard"></i></div>
                     <h3>تایپ سریع</h3>
-                    <p>سرعت تایپ خود را بسنجید.</p>
-                    <button class="btn btn-secondary" onclick="alert('به زودی اضافه می‌شود!')">بازی کن</button>
+                    <button class="btn btn-secondary" onclick="loadGame('typing')">بازی کن</button>
+                </div>
+                <div class="game-card">
+                    <div class="game-icon"><i class="fas fa-dragon"></i></div>
+                    <h3>بازی مار (Snake)</h3>
+                    <button class="btn btn-secondary" onclick="loadGame('snake')">بازی کن</button>
                 </div>
             </div>
         </section>
 
         <section id="jokes" class="container hidden" style="padding-top: 100px; padding-bottom: 50px;">
-            <h2 class="section-title">ایستگاه خنده</h2>
+            <h2 class="section-title">ایستگاه خنده و فکر</h2>
+            
             <div class="joke-card">
                 <div class="joke-category">جوک تصادفی</div>
-                <p class="joke-content" id="joke-text">درحال بارگذاری...</p>
-                <button class="btn btn-primary" onclick="newJoke()">جوک بعدی <i class="fas fa-redo"></i></button>
-                <div style="margin-top: 20px; display: flex; justify-content: center; gap: 10px;">
-                    <button class="btn" style="background:transparent; border:1px solid #ccc" onclick="reaction('like')">😂 <span id="like-count">0</span></button>
-                    <button class="btn" style="background:transparent; border:1px solid #ccc" onclick="reaction('dislike')">😐</button>
+                <p class="joke-content" id="joke-text" style="font-size: 1.3rem; min-height: 80px; display:flex; align-items:center; justify-content:center;">درحال بارگذاری...</p>
+                <div style="margin-top:20px;">
+                    <button class="btn btn-primary" onclick="newJoke()">جوک بعدی <i class="fas fa-redo"></i></button>
                 </div>
             </div>
             
-            <div style="margin-top: 50px;">
-                <h3 style="text-align: center; margin-bottom: 20px;">معمای روز</h3>
-                <div class="joke-card" style="background: var(--secondary); color: white;">
-                    <p id="riddle-text">آن چیست که هرچه از آن برداریم بزرگتر می‌شود؟</p>
-                    <button class="btn btn-accent" onclick="toggleRiddleAnswer()" style="margin-top:10px">نمایش پاسخ</button>
-                    <p id="riddle-answer" style="display:none; margin-top:15px; font-weight:bold; color: var(--dark);">گودال!</p>
+            <h3 style="text-align: center; margin: 40px 0 20px; color: var(--secondary);">معمـکده</h3>
+            <div class="joke-card" style="background: var(--dark); color: white;">
+                <div class="joke-category" style="background: var(--secondary);">چیستان</div>
+                <p id="riddle-text" style="font-size: 1.2rem; margin-bottom:20px;">درحال بارگذاری...</p>
+                <div id="riddle-answer-box" style="display:none; background: rgba(255,255,255,0.1); padding:10px; border-radius:10px; margin-bottom:15px;">
+                    پاسخ: <span id="riddle-answer" style="color: var(--accent); font-weight:bold;"></span>
+                </div>
+                <div style="display:flex; justify-content:center; gap:10px;">
+                    <button class="btn btn-light" style="background:white; color:black" onclick="toggleRiddleAnswer()">نمایش پاسخ</button>
+                    <button class="btn btn-accent" onclick="newRiddle()">معمای بعدی</button>
                 </div>
             </div>
         </section>
 
         <section id="videos" class="container hidden" style="padding-top: 100px;">
             <h2 class="section-title">ویدیوهای طنز</h2>
-            <div class="media-grid">
-                <div class="media-card">
-                    <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
-                    <div class="media-info">
-                        <h4>گربه پیانیست</h4>
-                        <p>دسته‌بندی: حیوانات</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
-                    <div class="media-info">
-                        <h4>سوتی‌های اخبار</h4>
-                        <p>دسته‌بندی: طنز تلویزیونی</p>
-                    </div>
-                </div>
-                <div class="media-card">
-                    <div class="media-placeholder"><i class="fas fa-play-circle"></i></div>
-                    <div class="media-info">
-                        <h4>بچه‌های بامزه</h4>
-                        <p>دسته‌بندی: کودکان</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section id="challenges" class="container hidden" style="padding-top: 100px;">
-            <h2 class="section-title">چالش‌های روزانه</h2>
-            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:30px;">
-                <div class="game-card">
-                    <h3>🎨 چالش خلاقیت</h3>
-                    <p>با کلمات "ماکارونی"، "فضاپیما" و "مادربزرگ" یک داستان کوتاه بنویسید.</p>
-                    <textarea style="width:100%; padding:10px; margin:10px 0; border-radius:10px;" rows="4" placeholder="داستان خود را بنویسید..."></textarea>
-                    <button class="btn btn-primary">ارسال پاسخ</button>
-                </div>
-                <div class="game-card">
-                    <h3>🧠 چالش فکری</h3>
-                    <p>تعداد مثلث‌های موجود در تصویر زیر را بشمارید.</p>
-                    <div style="height:100px; background:#eee; margin:10px 0; display:flex; align-items:center; justify-content:center;">[تصویر مثلث]</div>
-                    <input type="number" style="padding:10px; border-radius:5px; border:1px solid #ddd;" placeholder="تعداد...">
-                    <button class="btn btn-secondary">بررسی</button>
-                </div>
+            <div style="text-align:center; padding: 50px; background: var(--card-bg); border-radius:20px;">
+                <i class="fas fa-film" style="font-size: 4rem; color: var(--secondary); margin-bottom:20px;"></i>
+                <h3>این بخش به زودی با ویدیوهای خنده‌دار پر می‌شود!</h3>
             </div>
         </section>
 
     </main>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-col">
-                    <h4>FunZone</h4>
-                    <p>بهترین پلتفرم سرگرمی آنلاین برای لحظات شاد شما.</p>
-                </div>
-                <div class="footer-col">
-                    <h4>لینک‌های سریع</h4>
-                    <ul>
-                        <li><a href="#" onclick="showSection('home')">خانه</a></li>
-                        <li><a href="#" onclick="showSection('games')">بازی‌ها</a></li>
-                        <li><a href="#" onclick="showSection('about')">درباره ما</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h4>تماس با ما</h4>
-                    <div class="social-icons">
-                        <a href="#"><i class="fab fa-instagram"></i></a>
-                        <a href="#"><i class="fab fa-twitter"></i></a>
-                        <a href="#"><i class="fab fa-telegram"></i></a>
-                    </div>
-                </div>
-            </div>
-            <div style="text-align: center; border-top: 1px solid rgba(255,255,255,0.1); padding-top: 20px;">
-                <p>&copy; 2026 FunZone. تمامی حقوق محفوظ است.</p>
-            </div>
+        <div class="container" style="text-align:center; padding: 30px; margin-top:50px; border-top:1px solid #ddd;">
+            <p>&copy; 2026 FunZone. تمامی حقوق محفوظ است.</p>
         </div>
     </footer>
 
     <script>
-        // --- DATA ---
+        // --- DATASETS (More content added) ---
         const jokesDB = [
             "یه نفر میره کتابفروشی میگه: آقا کتاب «چگونه یک شبه پولدار شویم» رو دارید؟ فروشنده میگه: بله، ولی پیشنهاد می‌کنم کتاب «چگونه با پلیس برخورد کنیم» رو هم بخرید!",
             "یارو میره دکتر میگه آقای دکتر هر شب خواب میبینم دارم با خرا فوتبال بازی میکنم. دکتره میگه خب امشب قرص بخور خواب نبینی. یارو میگه نه امشب فیناله!",
             "از یه نفر میپرسن: چرا پرنده ها زمستون که میشه میرن جنوب؟ میگه: چون اگه پیاده برن خیلی راهه!",
             "معلم: چرا انشات رو ننوشتی؟ دانش آموز: آقا معلم، پدربزرگم فوت کرد. معلم: خدا بیامرزه، ولی این چهارمین پدربزرگت بود که امسال مرد!",
-            "حیف نون زنگ میزنه آتش نشانی، میگه آقا تشریف بیارید اینجا آتیش گرفته. آتش نشان میگه: کجاست؟ میگه: مگه شما خودتون آدرس ندارید؟"
-        ];
-        
-        const subtitles = [
-            "جایی برای خندیدن...",
-            "بازی کن و جایزه ببر!",
-            "چالش‌های روزانه منتظرته",
-            "دنیایی از سرگرمی دیجیتال"
+            "حیف نون زنگ میزنه آتش نشانی، میگه آقا تشریف بیارید اینجا آتیش گرفته. آتش نشان میگه: کجاست؟ میگه: مگه شما خودتون آدرس ندارید؟",
+            "مورد داشتیم طرف رفته خواستگاری، پدر عروس گفته مهریه دخترم ۱۰۰۰ تا سکه است. طرف گفته: زیاد نیست؟ پدر عروس گفته: میتونی ۱۰۰۰ تا ربع سکه بدی! داماد هم خوشحال شده قبول کرده!",
+            "غضنفر میره ساندویچی، میگه: بندری دارید؟ طرف میگه: بله. غضنفر میگه: پس قربونت یه دونه بذار، حالشو ندارم پاشم برقصم!",
+            "طرف میره تو خیابون داد میزنه: من بدبختم، من بیچارم! یکی رد میشه میگه: داداش داد نزن، فالوورات میریزه!",
+            "بابام اومده میگه چرا اینترنت قطعه؟ میگم مودم سوخته. میگه ای بابا، حالا کی میخواد بره زغال بخره!",
+            "یه روز یه مرده میخوره به نرده، برمیگرده! (ببخشید سطح جوک‌ها بالا پایین داره!)",
+            "رفتم دکتر گفتم آقای دکتر وقتی چای میخورم چشمم درد میگیره. دکتر گفت: خب قاشق رو از تو لیوان در بیار!",
+            "حیف نون داشت رادیو باز میکرد، قطعاتش رو میریخت بیرون. بهش میگن چیکار میکنی؟ میگه دارم اون گوینده بی ادب رو پیدا میکنم که همش وسط آهنگ حرف میزنه!",
+            "طرف با ماشین میره تو دره. پلیس میاد میگه چرا نپیچیدی؟ میگه راهنما زدم، کوه کنار نرفت!",
+            "از پسره میپرسن ماه عسل خوش گذشت؟ میگه خیلی، ولی حیف زنم نیومد!",
+            "رفتم بانک وام بگیرم، ضامن خواستن. گفتم ضامن ندارم ولی بمب دارم! الان دارم از زندان پست میذارم.",
+            "مهمان: آقا پسر چه کاره‌این؟ پسر: درس میخونم. مهمان: باریکلا، چه رشته‌ای؟ پسر: رشته فیبر نوری! (منظورش اینترنت گردیه)",
+            "شامپو خریدم روش نوشته: «این محصول را روی سرتان بریزید». واقعا اگه نمینوشت من میریختم تو کفشم راه میرفتم که قد بکشم!",
+            "نصیحت پدرانه: پسرم، هیچوقت با آدم نادان بحث نکن. چون مردم تفاوت شما رو متوجه نمیشن!",
+            "یه مورچه میره روی کوه داد میزنه: من سلطان جنگلم! شیر میگه: بیا پایین بابا، سرت گیج میره!",
+            "حیف نون میره امتحان گواهینامه بده، افسر میپرسه: اگه یه نفر وسط خیابون بود چیکار میکنی؟ میگه: میزنم بهش! افسر میگه: رد شدی، باید بوق بزنی!"
         ];
 
-        // --- STATE & UTILS ---
-        let currentSection = 'home';
-        let jokeIndex = 0;
+        const riddlesDB = [
+            { q: "آن چیست که هرچه از آن برداریم بزرگتر می‌شود؟", a: "گودال" },
+            { q: "آن چیست که وقتی هوا گرم می‌شود، لباس می‌پوشد و وقتی سرد می‌شود، لباس در می‌آورد؟", a: "درخت" },
+            { q: "آن چیست که شهر دارد اما خانه نه، کوه دارد اما درخت نه، و آب دارد اما ماهی نه؟", a: "نقشه" },
+            { q: "آن چیست که سر ندارد، کلاه دارد، یک پا دارد و کفش ندارد؟", a: "قارچ" },
+            { q: "آن چیست که اگر نامش را صدا بزنی، می‌شکند؟", a: "سکوت" },
+            { q: "برادرِ زنِ داییِ برادرم چه نسبتی با من دارد؟", a: "دایی خودم!" },
+            { q: "آن چیست که همه چیز را می‌خورد اما اگر آب بخورد می‌میرد؟", a: "آتش" },
+            { q: "آن چیست که روز و شب راه می‌رود اما خسته نمی‌شود؟", a: "ساعت" },
+            { q: "آن چیست که یک چشم دارد اما نمی‌بیند؟", a: "سوزن" },
+            { q: "آن چیست که متعلق به شماست، اما دیگران بیشتر از شما از آن استفاده می‌کنند؟", a: "اسم شما" }
+        ];
+
+        const typingSentences = [
+            "موش کوچولو پرید توی سوراخ و قایم شد.",
+            "آسمان شب پر از ستاره‌های درخشان است.",
+            "سریع‌ترین روباه قهوه‌ای از روی سگ تنبل می‌پرد.",
+            "زندگی مثل دوچرخه‌سواری است، برای حفظ تعادل باید حرکت کنی.",
+            "هر که بامش بیش، برفش بیشتر."
+        ];
+
+        // --- GLOBAL VARIABLES ---
+        let currentRiddleIndex = 0;
+        let snakeGameInterval;
 
         // --- NAVIGATION ---
         function showSection(sectionId) {
-            // Hide all sections
             document.querySelectorAll('main > section').forEach(sec => sec.classList.add('hidden'));
-            
-            // Show target section
             const target = document.getElementById(sectionId);
-            if(target) {
-                target.classList.remove('hidden');
-                // Scroll to top if not home
-                if(sectionId !== 'home') window.scrollTo(0, 0);
-            }
-            
-            // Close any active game
+            if(target) target.classList.remove('hidden');
+            if(sectionId !== 'home') window.scrollTo(0, 0);
             closeGame();
         }
 
-        // --- HERO TYPING EFFECT ---
-        let subIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        
-        function typeWriter() {
-            const currentText = subtitles[subIndex];
-            const typingElement = document.getElementById('typing-text');
-            
-            if (!isDeleting && charIndex <= currentText.length) {
-                typingElement.textContent = currentText.substring(0, charIndex);
-                charIndex++;
-                setTimeout(typeWriter, 100);
-            } else if (isDeleting && charIndex >= 0) {
-                typingElement.textContent = currentText.substring(0, charIndex);
-                charIndex--;
-                setTimeout(typeWriter, 50);
-            } else {
-                if (!isDeleting) {
-                    isDeleting = true;
-                    setTimeout(typeWriter, 2000); // Pause at end
-                } else {
-                    isDeleting = false;
-                    subIndex = (subIndex + 1) % subtitles.length;
-                    setTimeout(typeWriter, 500);
-                }
-            }
-        }
-
-        // --- THEME TOGGLE ---
+        // --- THEME & TYPEWRITER ---
         const themeBtn = document.getElementById('themeBtn');
         let isDark = false;
-        
         themeBtn.addEventListener('click', () => {
             isDark = !isDark;
             document.body.setAttribute('data-theme', isDark ? 'dark' : 'light');
             themeBtn.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
         });
 
-        // --- JOKE SYSTEM ---
+        const subtitles = ["بازی‌های جدید اضافه شد!", "جایی برای خندیدن...", "رکوردت رو ثبت کن", "دنیایی از سرگرمی"];
+        let subIndex = 0, charIndex = 0, isDeleting = false;
+        
+        function typeWriter() {
+            const current = subtitles[subIndex];
+            const el = document.getElementById('typing-text');
+            if (!isDeleting && charIndex <= current.length) {
+                el.textContent = current.substring(0, charIndex++);
+                setTimeout(typeWriter, 100);
+            } else if (isDeleting && charIndex >= 0) {
+                el.textContent = current.substring(0, charIndex--);
+                setTimeout(typeWriter, 50);
+            } else {
+                isDeleting = !isDeleting;
+                if(!isDeleting) subIndex = (subIndex + 1) % subtitles.length;
+                setTimeout(typeWriter, isDeleting ? 2000 : 500);
+            }
+        }
+        typeWriter();
+
+        // --- CONTENT LOGIC (Jokes & Riddles) ---
         function newJoke() {
-            const jokeText = document.getElementById('joke-text');
-            jokeText.style.opacity = 0;
+            const el = document.getElementById('joke-text');
+            el.style.opacity = 0;
             setTimeout(() => {
-                let newIndex;
-                do { newIndex = Math.floor(Math.random() * jokesDB.length); } while (newIndex === jokeIndex);
-                jokeIndex = newIndex;
-                jokeText.textContent = jokesDB[jokeIndex];
-                jokeText.style.opacity = 1;
-                // Reset likes
-                document.getElementById('like-count').textContent = Math.floor(Math.random() * 50);
+                const rand = Math.floor(Math.random() * jokesDB.length);
+                el.textContent = jokesDB[rand];
+                el.style.opacity = 1;
             }, 300);
         }
-
-        function reaction(type) {
-            const count = document.getElementById('like-count');
-            if(type === 'like') count.textContent = parseInt(count.textContent) + 1;
-        }
-
-        function toggleRiddleAnswer() {
-            const ans = document.getElementById('riddle-answer');
-            ans.style.display = ans.style.display === 'none' ? 'block' : 'none';
-        }
-
-        // --- GAME SYSTEM ---
         
+        function newRiddle() {
+            currentRiddleIndex = Math.floor(Math.random() * riddlesDB.length);
+            document.getElementById('riddle-text').textContent = riddlesDB[currentRiddleIndex].q;
+            document.getElementById('riddle-answer').textContent = riddlesDB[currentRiddleIndex].a;
+            document.getElementById('riddle-answer-box').style.display = 'none';
+        }
+        
+        function toggleRiddleAnswer() {
+            const box = document.getElementById('riddle-answer-box');
+            box.style.display = box.style.display === 'none' ? 'block' : 'none';
+        }
+
+        // Initialize Content
+        newJoke();
+        newRiddle();
+
+        // --- GAME SYSTEM CONTROLLER ---
         function loadGame(gameType) {
             const arena = document.getElementById('active-game-area');
             const board = document.getElementById('game-board-content');
@@ -605,137 +394,214 @@
             list.style.display = 'none';
             arena.classList.add('active');
             status.textContent = '';
+            board.innerHTML = ''; // Clear previous game
 
             if (gameType === 'tictactoe') {
-                title.textContent = "دوز (Tic Tac Toe)";
-                startTicTacToe(board, status);
+                title.textContent = "دوز"; startTicTacToe(board, status);
             } else if (gameType === 'guess') {
-                title.textContent = "حدس عدد";
-                startGuessNumber(board, status);
+                title.textContent = "حدس عدد"; startGuessNumber(board, status);
+            } else if (gameType === 'memory') {
+                title.textContent = "حافظه تصویری"; startMemoryGame(board, status);
+            } else if (gameType === 'typing') {
+                title.textContent = "تایپ سریع"; startTypingGame(board, status);
+            } else if (gameType === 'snake') {
+                title.textContent = "مار (Snake)"; startSnakeGame(board, status);
             }
         }
 
         function closeGame() {
             document.getElementById('active-game-area').classList.remove('active');
             document.getElementById('games-list').style.display = 'grid';
-        }
-
-        // --- GAME 1: TIC TAC TOE ---
-        let tttState = ['', '', '', '', '', '', '', '', ''];
-        let tttActive = true;
-        
-        function startTicTacToe(container, statusDisplay) {
-            tttState = ['', '', '', '', '', '', '', '', ''];
-            tttActive = true;
-            statusDisplay.textContent = "نوبت شما (X)";
             
+            // Stop Loops
+            if(snakeGameInterval) clearInterval(snakeGameInterval);
+            window.removeEventListener('keydown', snakeKeyHandler); // Cleanup
+        }
+
+        // --- 1. TIC TAC TOE ---
+        let tttBoard = [];
+        function startTicTacToe(container, status) {
+            tttBoard = Array(9).fill('');
+            status.textContent = "نوبت شما (X)";
             let html = '<div class="ttt-board">';
-            for(let i=0; i<9; i++) {
-                html += `<div class="ttt-cell" id="cell-${i}" onclick="tttMove(${i})"></div>`;
-            }
-            html += '</div>';
-            container.innerHTML = html;
+            for(let i=0; i<9; i++) html += `<div class="ttt-cell" id="c${i}" onclick="tttMove(${i})"></div>`;
+            container.innerHTML = html + '</div>';
+            window.tttActive = true;
         }
-
-        function tttMove(index) {
-            const statusDisplay = document.getElementById('game-status');
-            if (!tttActive || tttState[index] !== '') return;
-
-            // Player Move
-            tttState[index] = 'X';
-            document.getElementById(`cell-${index}`).textContent = 'X';
-            document.getElementById(`cell-${index}`).classList.add('x');
-
-            if (checkWin('X')) {
-                statusDisplay.textContent = "تبریک! شما برنده شدید!";
-                tttActive = false;
-                return;
-            }
-            if (!tttState.includes('')) {
-                statusDisplay.textContent = "بازی مساوی شد!";
-                tttActive = false;
-                return;
-            }
-
-            // Computer Move (Simple Random)
-            statusDisplay.textContent = "نوبت کامپیوتر...";
+        window.tttMove = function(i) {
+            if(!window.tttActive || tttBoard[i]) return;
+            tttBoard[i] = 'X'; updateTTT(i, 'X');
+            if(checkTTT('X')) { endTTT('شما بردید! 🎉'); return; }
+            if(!tttBoard.includes('')) { endTTT('مساوی شد!'); return; }
+            
+            // AI
             setTimeout(() => {
-                if(!tttActive) return;
-                let emptyIndices = tttState.map((val, idx) => val === '' ? idx : null).filter(val => val !== null);
-                let randIdx = emptyIndices[Math.floor(Math.random() * emptyIndices.length)];
-                
-                tttState[randIdx] = 'O';
-                document.getElementById(`cell-${randIdx}`).textContent = 'O';
-                document.getElementById(`cell-${randIdx}`).classList.add('o');
+                if(!window.tttActive) return;
+                let empty = tttBoard.map((v,k)=>v===''?k:null).filter(v=>v!==null);
+                let rand = empty[Math.floor(Math.random()*empty.length)];
+                tttBoard[rand] = 'O'; updateTTT(rand, 'O');
+                if(checkTTT('O')) endTTT('باختی! 🤖');
+            }, 400);
+        };
+        function updateTTT(i, p) {
+            const cell = document.getElementById(`c${i}`);
+            cell.textContent = p; cell.classList.add(p.toLowerCase());
+        }
+        function checkTTT(p) {
+            const wins = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+            return wins.some(w => tttBoard[w[0]]===p && tttBoard[w[1]]===p && tttBoard[w[2]]===p);
+        }
+        function endTTT(msg) { document.getElementById('game-status').textContent = msg; window.tttActive = false; }
 
-                if (checkWin('O')) {
-                    statusDisplay.textContent = "کامپیوتر برنده شد :(";
-                    tttActive = false;
-                } else {
-                    statusDisplay.textContent = "نوبت شما (X)";
-                }
-            }, 500);
+        // --- 2. GUESS NUMBER ---
+        function startGuessNumber(container, status) {
+            let target = Math.floor(Math.random()*100)+1;
+            let tries = 0;
+            container.innerHTML = `
+                <p>عدد بین ۱ تا ۱۰۰</p>
+                <input type="number" id="gInput" class="btn" style="background:white;border:1px solid #aaa;width:100px;margin:10px;">
+                <button class="btn btn-primary" onclick="checkGuessNum()">حدس</button>
+            `;
+            window.checkGuessNum = () => {
+                let val = +document.getElementById('gInput').value;
+                tries++;
+                if(val === target) status.innerHTML = `<span style="color:green">درست بود! تعداد تلاش: ${tries}</span>`;
+                else status.textContent = val < target ? "بیشتر..." : "کمتر...";
+            };
         }
 
-        function checkWin(player) {
-            const wins = [
-                [0,1,2], [3,4,5], [6,7,8], // Rows
-                [0,3,6], [1,4,7], [2,5,8], // Cols
-                [0,4,8], [2,4,6]           // Diagonals
-            ];
-            return wins.some(comb => {
-                return tttState[comb[0]] === player && 
-                       tttState[comb[1]] === player && 
-                       tttState[comb[2]] === player;
+        // --- 3. MEMORY GAME ---
+        function startMemoryGame(container, status) {
+            const emojis = ['🍕','🚀','🐱','🌵','🎈','💎','🎸','🍦'];
+            let cards = [...emojis, ...emojis].sort(() => 0.5 - Math.random());
+            let flipped = [], matched = 0;
+            
+            let html = '<div class="memory-grid">';
+            cards.forEach((emoji, i) => {
+                html += `<div class="memory-card" id="mc${i}" onclick="flipCard(${i}, '${emoji}')"><div class="back"></div></div>`;
             });
+            container.innerHTML = html + '</div>';
+            status.textContent = "جفت‌ها را پیدا کن!";
+
+            window.flipCard = (i, emoji) => {
+                let card = document.getElementById(`mc${i}`);
+                if(card.classList.contains('flipped') || flipped.length >= 2) return;
+                
+                card.classList.add('flipped');
+                card.textContent = emoji;
+                flipped.push({id: i, emoji: emoji});
+
+                if(flipped.length === 2) {
+                    if(flipped[0].emoji === flipped[1].emoji) {
+                        matched++;
+                        flipped = [];
+                        if(matched === 8) status.textContent = "تبریک! تمام شدی! 🎉";
+                    } else {
+                        setTimeout(() => {
+                            document.getElementById(`mc${flipped[0].id}`).classList.remove('flipped');
+                            document.getElementById(`mc${flipped[0].id}`).textContent = '';
+                            document.getElementById(`mc${flipped[1].id}`).classList.remove('flipped');
+                            document.getElementById(`mc${flipped[1].id}`).textContent = '';
+                            flipped = [];
+                        }, 1000);
+                    }
+                }
+            };
         }
 
-        // --- GAME 2: GUESS NUMBER ---
-        let targetNum;
-        let attempts;
-
-        function startGuessNumber(container, statusDisplay) {
-            targetNum = Math.floor(Math.random() * 100) + 1;
-            attempts = 0;
+        // --- 4. TYPING GAME ---
+        function startTypingGame(container, status) {
+            let sentence = typingSentences[Math.floor(Math.random() * typingSentences.length)];
+            let startTime = null;
             
             container.innerHTML = `
-                <div style="max-width:300px; margin:0 auto;">
-                    <p style="margin-bottom:15px;">من یک عدد بین ۱ تا ۱۰۰ انتخاب کردم.</p>
-                    <input type="number" id="guessInput" class="btn" style="background:white; border:1px solid #ccc; width:100px; margin-left:10px; cursor:text;">
-                    <button class="btn btn-primary" onclick="checkGuess()">حدس بزن</button>
-                    <p id="guessFeedback" style="margin-top:20px; font-size:1.2rem;"></p>
+                <div class="typing-area">
+                    <div class="typing-text">${sentence}</div>
+                    <input type="text" class="typing-input" placeholder="شروع به تایپ کن..." oninput="checkTyping(this)">
                 </div>
             `;
+            
+            window.checkTyping = (input) => {
+                if(!startTime) startTime = new Date();
+                let val = input.value;
+                if(val === sentence) {
+                    let time = ((new Date() - startTime) / 1000).toFixed(1);
+                    status.innerHTML = `<span style="color:green">عالی! زمان: ${time} ثانیه</span>`;
+                    input.disabled = true;
+                } else if (sentence.startsWith(val)) {
+                    status.textContent = "ادامه بده...";
+                    status.style.color = "orange";
+                } else {
+                    status.textContent = "غلط شد!";
+                    status.style.color = "red";
+                }
+            };
         }
 
-        window.checkGuess = function() { // Expose to global scope for HTML onclick
-            const val = parseInt(document.getElementById('guessInput').value);
-            const feedback = document.getElementById('guessFeedback');
-            attempts++;
+        // --- 5. SNAKE GAME ---
+        let snakeKeyHandler; 
+        function startSnakeGame(container, status) {
+            container.innerHTML = '<canvas id="snakeCanvas" width="300" height="300"></canvas>';
+            const ctx = document.getElementById('snakeCanvas').getContext('2d');
+            
+            let snake = [{x:10, y:10}];
+            let food = {x:15, y:15};
+            let dx = 0, dy = 0;
+            let score = 0;
+            let gridSize = 15; // 20x20 grid
+            let tileCount = 20;
 
-            if (isNaN(val)) {
-                feedback.textContent = "لطفا یک عدد وارد کنید!";
-                return;
+            status.textContent = "با دکمه‌های جهت‌نما حرکت کن (امتیاز: 0)";
+
+            function gameLoop() {
+                // Move
+                let head = {x: snake[0].x + dx, y: snake[0].y + dy};
+
+                // Wall Collision
+                if(head.x < 0) head.x = tileCount-1;
+                if(head.x >= tileCount) head.x = 0;
+                if(head.y < 0) head.y = tileCount-1;
+                if(head.y >= tileCount) head.y = 0;
+
+                // Self Collision
+                if(snake.some(s => s.x === head.x && s.y === head.y) && (dx!==0 || dy!==0)) {
+                    status.textContent = `باختی! امتیاز نهایی: ${score}`;
+                    clearInterval(snakeGameInterval);
+                    return;
+                }
+
+                snake.unshift(head);
+
+                // Eat Food
+                if(head.x === food.x && head.y === food.y) {
+                    score++;
+                    status.textContent = `امتیاز: ${score}`;
+                    food = {x: Math.floor(Math.random()*tileCount), y: Math.floor(Math.random()*tileCount)};
+                } else {
+                    snake.pop(); // Remove tail if not eating
+                }
+
+                // Draw
+                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--dark');
+                ctx.fillRect(0, 0, 300, 300);
+
+                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--primary');
+                snake.forEach(part => ctx.fillRect(part.x*gridSize, part.y*gridSize, gridSize-2, gridSize-2));
+
+                ctx.fillStyle = getComputedStyle(document.body).getPropertyValue('--accent');
+                ctx.fillRect(food.x*gridSize, food.y*gridSize, gridSize-2, gridSize-2);
             }
 
-            if (val === targetNum) {
-                feedback.innerHTML = `<span style="color:green">آفرین! عدد ${targetNum} درست بود.<br>تعداد تلاش: ${attempts}</span>`;
-                // Add simple confetti effect visually by changing BG briefly
-                document.getElementById('active-game-area').style.backgroundColor = '#d4edda';
-            } else if (val < targetNum) {
-                feedback.textContent = "بیشتره! برو بالاتر ⬆️";
-                feedback.style.color = "var(--primary)";
-            } else {
-                feedback.textContent = "کمتره! بیا پایین‌تر ⬇️";
-                feedback.style.color = "var(--secondary)";
-            }
-        };
-
-        // --- INIT ---
-        document.addEventListener('DOMContentLoaded', () => {
-            typeWriter();
-            newJoke(); // Load initial joke
-        });
+            snakeKeyHandler = (e) => {
+                if([37,38,39,40].includes(e.keyCode)) e.preventDefault(); // Stop scroll
+                if(e.keyCode===37 && dx===0) { dx=-1; dy=0; }
+                if(e.keyCode===38 && dy===0) { dx=0; dy=-1; }
+                if(e.keyCode===39 && dx===0) { dx=1; dy=0; }
+                if(e.keyCode===40 && dy===0) { dx=0; dy=1; }
+            };
+            window.addEventListener('keydown', snakeKeyHandler);
+            snakeGameInterval = setInterval(gameLoop, 150);
+        }
 
     </script>
 </body>
