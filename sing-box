@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>AmirVM | اتصال هوشمند</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --bg-deep: #020617;
+            --primary: #0ea5e9; 
+            --accent: #22d3ee; 
+            --cyan: #06b6d4;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+        body {
+            font-family: 'Vazirmatn', sans-serif;
+            background-color: var(--bg-deep);
+            color: var(--text-main);
+            min-height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .aurora-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            z-index: -1;
+            background: radial-gradient(circle at 50% 0%, #0c4a6e 0%, var(--bg-deep) 70%);
+        }
+
+        .container { width: 90%; max-width: 450px; z-index: 10; display: flex; flex-direction: column; gap: 20px; }
+
+        .card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 28px;
+            padding: 30px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(14, 165, 233, 0.1);
+        }
+
+        .brand-badge {
+            display: inline-block;
+            padding: 6px 16px;
+            background: rgba(14, 165, 233, 0.1);
+            border-radius: 50px;
+            color: var(--accent);
+            font-size: 0.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        h1 { font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
+        p { color: var(--text-muted); margin-bottom: 30px; }
+
+        .action-btn {
+            display: flex; align-items: center; justify-content: center;
+            width: 100%; padding: 20px; font-size: 1.15rem; font-weight: 700;
+            color: white; text-decoration: none;
+            background: linear-gradient(135deg, var(--primary), var(--cyan));
+            border-radius: 20px; transition: 0.3s; cursor: pointer; border: none;
+        }
+        .action-btn:hover { transform: scale(1.02); }
+
+        .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .mini-card {
+            background: var(--glass); border: 1px solid var(--glass-border);
+            border-radius: 20px; padding: 18px; text-align: center;
+            text-decoration: none; color: var(--text-main); transition: 0.3s;
+        }
+        .mini-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 8px; display: block; }
+
+        .footer { text-align: center; margin-top: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+
+    <div class="aurora-bg"></div>
+
+    <div class="container">
+        <div class="card">
+            <span class="brand-badge">AmirVM NETWORK</span>
+            <h1>AmirVM</h1>
+            <p>اتصال هوشمند بر پایه جدیدترین سرورها</p>
+            
+            <button class="action-btn" onclick="copyConfig()">
+                <i class="fas fa-copy" style="margin-left: 10px;"></i>
+                کپی کانفیگ اختصاصی AmirVM
+            </button>
+
+            <div style="margin-top: 15px; font-size: 0.75rem; color: var(--accent);">
+                لینک جدید Google Drive جایگزین شد
+            </div>
+        </div>
+
+        <div class="grid-links">
+            <a href="https://t.me/AmirvmIR" target="_blank" class="mini-card">
+                <i class="fab fa-telegram-plane"></i>
+                <span>کانال تلگرام</span>
+            </a>
+            <a href="https://t.me/AmirvmIR" target="_blank" class="mini-card">
+                <i class="fas fa-headset"></i>
+                <span>پشتیبانی</span>
+            </a>
+        </div>
+
+        <div class="footer">
+            Design & Config by <a href="https://t.me/AmirvmIR" style="color:var(--primary); text-decoration:none;">AmirVM</a>
+        </div>
+    </div>
+
+    <script>
+        function copyConfig() {
+            // محتوای جدید JSON که فرستادید (تمیز شده و شخصی سازی شده برای AmirVM)
+            const config = {
+                "log": {"level": "panic", "timestamp": true},
+                "dns": {
+                    "servers": [
+                        {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "AmirVM_Main_Server"},
+                        {"tag": "dns_direct", "address": "local", "detour": "AmirVM_Main_Server"}
+                    ],
+                    "final": "dns_proxy"
+                },
+                "inbounds": [
+                    {"type": "mixed", "listen": "127.0.0.1", "listen_port": 20122, "sniff": true, "udp_fragment": true},
+                    {"type": "tun", "address": ["172.19.0.1/30"], "auto_route": true, "sniff": true}
+                ],
+                "outbounds": [
+                    {"type": "selector", "tag": "AmirVM_Main_Server", "outbounds": ["AmirVM_Cloud_Server", "AmirVM_Direct"]},
+                    {"type": "selector", "tag": "AmirVM_Cloud_Server", "outbounds": ["AmirVM_Node_1"]},
+                    {
+                        "type": "http", 
+                        "tag": "AmirVM_Node_1", 
+                        "server": "203.23.179.22", 
+                        "server_port": 10780, 
+                        "headers": {
+                            "Host": "stream.meet.google.com", 
+                            "Proxy-Authorization": "Basic cHVyZXZwbjBzMTg1MjI5MjA6YUdzZFFGUTAucXZz"
+                        }
+                    },
+                    {"type": "direct", "tag": "AmirVM_Direct"}
+                ],
+                "route": {"auto_detect_interface": true}
+            };
+
+            const jsonStr = JSON.stringify(config, null, 2);
+            
+            navigator.clipboard.writeText(jsonStr).then(() => {
+                alert("کانفیگ جدید AmirVM با موفقیت کپی شد! در برنامه Sing-box گزینه Import from Clipboard را بزنید.");
+                // هدایت به لینک درایو برای اطمینان بیشتر
+                window.location.href = "sing-box://import-remote-profile?url=https://drive.google.com/uc?id=12hBii4aUOzPGyAQFq1S3Zbrz1jVBmSTy#AmirVM_New";
+            });
+        }
+    </script>
+</body>
+</html>
