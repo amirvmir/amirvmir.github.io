@@ -13,7 +13,6 @@
             --bg-deep: #020617;
             --primary: #0ea5e9; 
             --accent: #22d3ee; 
-            --cyan: #06b6d4;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f8fafc;
@@ -27,10 +26,11 @@
             background-color: var(--bg-deep);
             color: var(--text-main);
             min-height: 100vh;
-            overflow: hidden;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+            position: relative;
         }
 
         .aurora-bg {
@@ -48,15 +48,15 @@
             -webkit-backdrop-filter: blur(20px);
             border: 1px solid var(--glass-border);
             border-radius: 28px;
-            padding: 30px;
+            padding: 35px;
             text-align: center;
-            box-shadow: 0 0 50px rgba(14, 165, 233, 0.1);
+            box-shadow: 0 10px 40px rgba(0,0,0,0.4);
         }
 
         .brand-badge {
             display: inline-block;
             padding: 6px 16px;
-            background: rgba(14, 165, 233, 0.1);
+            background: rgba(14, 165, 233, 0.15);
             border-radius: 50px;
             color: var(--accent);
             font-size: 0.8rem;
@@ -64,27 +64,29 @@
             margin-bottom: 20px;
         }
 
-        h1 { font-size: 2.5rem; font-weight: 900; color: #fff; margin-bottom: 10px; }
-        p { color: var(--text-muted); margin-bottom: 30px; }
+        h1 { font-size: 2.5rem; font-weight: 900; margin-bottom: 10px; }
+        p { color: var(--text-muted); margin-bottom: 35px; }
 
         .action-btn {
             display: flex; align-items: center; justify-content: center;
-            width: 100%; padding: 20px; font-size: 1.15rem; font-weight: 700;
+            width: 100%; padding: 22px; font-size: 1.2rem; font-weight: 700;
             color: white; text-decoration: none;
             background: linear-gradient(135deg, var(--primary), var(--cyan));
-            border-radius: 20px; transition: 0.3s; cursor: pointer; border: none;
+            border-radius: 22px; transition: 0.3s;
+            box-shadow: 0 15px 35px -10px rgba(14, 165, 233, 0.5);
+            border: none; cursor: pointer;
         }
-        .action-btn:hover { transform: scale(1.02); }
+        .action-btn:hover { transform: translateY(-3px); filter: brightness(1.1); }
 
-        .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 10px; }
+        .grid-links { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .mini-card {
             background: var(--glass); border: 1px solid var(--glass-border);
             border-radius: 20px; padding: 18px; text-align: center;
             text-decoration: none; color: var(--text-main); transition: 0.3s;
         }
-        .mini-card i { font-size: 1.5rem; color: var(--accent); margin-bottom: 8px; display: block; }
+        .mini-card i { font-size: 1.5rem; color: var(--primary); margin-bottom: 8px; display: block; }
 
-        .footer { text-align: center; margin-top: 20px; font-size: 0.75rem; color: rgba(255,255,255,0.2); }
+        .footer { text-align: center; font-size: 0.75rem; color: rgba(255,255,255,0.2); }
     </style>
 </head>
 <body>
@@ -93,17 +95,17 @@
 
     <div class="container">
         <div class="card">
-            <span class="brand-badge">AmirVM NETWORK</span>
+            <span class="brand-badge">AMIRVM EXCLUSIVE</span>
             <h1>AmirVM</h1>
-            <p>اتصال هوشمند بر پایه جدیدترین سرورها</p>
+            <p>در حال همگام‌سازی با سرورهای امیر وی‌ام...</p>
             
             <button class="action-btn" onclick="copyConfig()">
                 <i class="fas fa-copy" style="margin-left: 10px;"></i>
-                کپی کانفیگ اختصاصی AmirVM
+                کپی دستی کانفیگ AmirVM
             </button>
 
-            <div style="margin-top: 15px; font-size: 0.75rem; color: var(--accent);">
-                لینک جدید Google Drive جایگزین شد
+            <div style="margin-top: 20px; font-size: 0.8rem; color: var(--accent);">
+                 عضویت در کانال: <a href="https://t.me/AmirvmIR" style="color:white; text-decoration:none;">@AmirvmIR</a>
             </div>
         </div>
 
@@ -119,52 +121,57 @@
         </div>
 
         <div class="footer">
-            Design & Config by <a href="https://t.me/AmirvmIR" style="color:var(--primary); text-decoration:none;">AmirVM</a>
+            Design & Branding by <a href="https://t.me/AmirvmIR" style="color:var(--primary); text-decoration:none;">AmirVM</a>
         </div>
     </div>
 
     <script>
         function copyConfig() {
-            // محتوای جدید JSON که فرستادید (تمیز شده و شخصی سازی شده برای AmirVM)
-            const config = {
-                "log": {"level": "panic", "timestamp": true},
-                "dns": {
-                    "servers": [
-                        {"tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "AmirVM_Main_Server"},
-                        {"tag": "dns_direct", "address": "local", "detour": "AmirVM_Main_Server"}
-                    ],
-                    "final": "dns_proxy"
+            // فایل JSON با برندینگ کامل AmirVM و لینک تلگرام شما در متادیتا
+            const amirConfig = {
+              "log": { "level": "panic", "timestamp": true },
+              "dns": {
+                "servers": [
+                  { "tag": "dns_proxy", "address": "https://1.1.1.1/dns-query", "detour": "@AmirVM_Network" },
+                  { "tag": "dns_direct", "address": "local", "detour": "@AmirVM_Network" }
+                ],
+                "final": "dns_proxy"
+              },
+              "inbounds": [
+                { "type": "tun", "address": ["172.19.0.1/30"], "auto_route": true, "sniff": true }
+              ],
+              "outbounds": [
+                { "type": "selector", "tag": "@AmirVM_Network", "outbounds": ["@AmirVM_Auto_Speed", "AmirVM_Support"] },
+                { "type": "selector", "tag": "AmirVM_Support", "outbounds": ["@AmirVM_Cloud"] },
+                { "type": "urltest", "tag": "@AmirVM_Auto_Speed", "outbounds": ["@AmirVM_Cloud"], "url": "http://google.com", "interval": "9m0s" },
+                {
+                  "type": "http",
+                  "tag": "@AmirVM_Cloud",
+                  "server": "203.23.179.22",
+                  "server_port": 10780,
+                  "headers": {
+                    "Host": "stream.meet.google.com",
+                    "Proxy-Authorization": "Basic cHVyZXZwbjBzMTg1MjI5MjA6YUdzZFFGUTAucXZz"
+                  }
                 },
-                "inbounds": [
-                    {"type": "mixed", "listen": "127.0.0.1", "listen_port": 20122, "sniff": true, "udp_fragment": true},
-                    {"type": "tun", "address": ["172.19.0.1/30"], "auto_route": true, "sniff": true}
-                ],
-                "outbounds": [
-                    {"type": "selector", "tag": "AmirVM_Main_Server", "outbounds": ["AmirVM_Cloud_Server", "AmirVM_Direct"]},
-                    {"type": "selector", "tag": "AmirVM_Cloud_Server", "outbounds": ["AmirVM_Node_1"]},
-                    {
-                        "type": "http", 
-                        "tag": "AmirVM_Node_1", 
-                        "server": "203.23.179.22", 
-                        "server_port": 10780, 
-                        "headers": {
-                            "Host": "stream.meet.google.com", 
-                            "Proxy-Authorization": "Basic cHVyZXZwbjBzMTg1MjI5MjA6YUdzZFFGUTAucXZz"
-                        }
-                    },
-                    {"type": "direct", "tag": "AmirVM_Direct"}
-                ],
-                "route": {"auto_detect_interface": true}
+                { "type": "direct", "tag": "direct" }
+              ],
+              "route": { "auto_detect_interface": true }
             };
 
-            const jsonStr = JSON.stringify(config, null, 2);
-            
-            navigator.clipboard.writeText(jsonStr).then(() => {
-                alert("کانفیگ جدید AmirVM با موفقیت کپی شد! در برنامه Sing-box گزینه Import from Clipboard را بزنید.");
-                // هدایت به لینک درایو برای اطمینان بیشتر
-                window.location.href = "sing-box://import-remote-profile?url=https://drive.google.com/uc?id=12hBii4aUOzPGyAQFq1S3Zbrz1jVBmSTy#AmirVM_New";
+            const jsonStr = JSON.stringify(amirConfig, null, 2);
+            // اضافه کردن کامنت‌های متادیتا در ابتدای فایل کپی شده
+            const finalString = "#profile-title: 🌟 AmirVM Config 🌟\n#support-url: https://t.me/AmirvmIR\n#profile-web-page-url: https://t.me/AmirvmIR\n" + jsonStr;
+
+            navigator.clipboard.writeText(finalString).then(() => {
+                alert("کانفیگ اختصاصی AmirVM کپی شد!");
             });
         }
+
+        // ورود خودکار
+        setTimeout(() => {
+            window.location.href = "sing-box://import-remote-profile?url=https://drive.google.com/uc?export=download&id=12hBii4aUOzPGyAQFq1S3Zbrz1jVBmSTy#AmirVM_Config";
+        }, 3000);
     </script>
 </body>
 </html>
