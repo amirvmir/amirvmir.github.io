@@ -2,177 +2,126 @@
 <html lang="fa" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AmirVM | اینترنت آزاد</title>
-    <link href="https://cdn.jsdelivr.net/gh/rastikerdar/vazirmatn@v33.003/misc/Farsi-digits/Farsi-digits.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>amirvm | نسل جدید اینترنت آزاد</title>
+    <meta name="description" content="پنل اختصاصی amirvm - کانفیگ‌های پرسرعت V2Ray, Sing-Box">
+
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* تنظیمات کلی و ریست */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Vazirmatn', sans-serif;
+        :root {
+            --bg-color: #1e1e1e;
+            --primary: #ffffff;
+            --accent: #b0b0b0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --glass-border: rgba(255, 255, 255, 0.1);
+            --text-main: #f0f0f0;
+            --text-mute: #aaaaaa;
         }
+        html { scroll-behavior: smooth; }
+        body { margin: 0; font-family: 'Vazirmatn', sans-serif; background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; }
+        .container { width: 100%; max-width: 500px; padding: 20px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 80px; }
 
-        body {
-            background-color: #0d0d11; /* رنگ پس‌زمینه خیلی تیره */
-            background-image: radial-gradient(circle at 50% 0%, #2a2a3e 0%, #0d0d11 70%);
-            color: #ffffff;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            overflow: hidden;
-            text-align: center;
+        header { text-align: center; margin-top: 20px; }
+        h1 { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
+        .subtitle { font-size: 0.9rem; color: var(--accent); margin-top: 5px; }
+
+        .card { background: var(--glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 20px; }
+        .section-title { font-size: 1rem; color: var(--text-mute); margin-bottom: 12px; padding-right: 10px; border-right: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
+        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+        .action-btn {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            border-radius: 18px;
+            padding: 15px;
+            display: flex; flex-direction: column; align-items: center; justify-content: center;
+            gap: 8px; cursor: pointer; text-decoration: none; color: var(--text-main);
+            position: relative; overflow: hidden; transition: all 0.2s;
         }
+        .action-btn:active { transform: scale(0.95); }
+        .action-btn i { font-size: 1.4rem; color: var(--text-mute); margin-bottom: 2px; }
+        .action-btn span { font-size: 0.9rem; font-weight: 700; }
+        .action-btn small { font-size: 0.7rem; color: var(--text-mute); }
+        .new-badge { position: absolute; top: 8px; left: 8px; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 900; background: var(--accent); color: #000; }
 
-        /* افکت نوری پس زمینه */
-        .glow {
-            position: absolute;
-            width: 300px;
-            height: 300px;
-            background: linear-gradient(180deg, #7b2cbf, #3a0ca3);
-            filter: blur(100px);
-            opacity: 0.2;
-            border-radius: 50%;
-            z-index: -1;
-            top: 20%;
-        }
+        .telegram-posts { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
+        .telegram-posts::-webkit-scrollbar { display: none; }
+        .telegram-post { flex: 0 0 280px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 18px; padding: 15px; font-size: 0.85rem; color: var(--text-mute); line-height: 1.6; transition: background 0.3s; }
+        .telegram-post:hover { background: rgba(255,255,255,0.08); }
+        .telegram-post a { color: var(--accent); text-decoration: none; font-weight: bold; }
 
-        /* کانتینر اصلی */
-        .container {
-            width: 90%;
-            max-width: 400px;
-            padding: 40px 20px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 24px;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
-            animation: fadeIn 1s ease-out;
-        }
-
-        /* هدر (نام و شعار) */
-        h1 {
-            font-size: 2.5rem;
-            font-weight: 800;
-            margin-bottom: 5px;
-            background: linear-gradient(to right, #fff, #a5a5a5);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            letter-spacing: 1px;
-        }
-
-        .subtitle {
-            font-size: 0.9rem;
-            color: #a0a0b0;
-            margin-bottom: 40px;
-            font-weight: 300;
-            letter-spacing: 0.5px;
-            opacity: 0.8;
-        }
-
-        /* دکمه اصلی */
-        .btn-singbox {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 12px;
-            width: 100%;
-            padding: 16px;
-            background: linear-gradient(135deg, #2d2d3a, #1a1a24);
-            color: #fff;
-            text-decoration: none;
-            border-radius: 16px;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            font-weight: 500;
-            font-size: 1.1rem;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .btn-singbox::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
-            transition: 0.5s;
-        }
-
-        .btn-singbox:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.4);
-            border-color: rgba(255, 255, 255, 0.2);
-            background: linear-gradient(135deg, #383848, #22222e);
-        }
-
-        .btn-singbox:hover::before {
-            left: 100%;
-        }
-
-        /* لوگوی داخل دکمه (SVG) */
-        .icon-box {
-            width: 28px;
-            height: 28px;
-            fill: #fff;
-        }
-
-        /* فوتر */
-        .footer {
-            margin-top: 50px;
-            font-size: 0.85rem;
-            color: #66667a;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-        }
-
-        .footer a {
-            color: #8fa3ff;
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .footer a:hover {
-            color: #fff;
-            text-decoration: underline;
-        }
-
-        /* انیمیشن ورود */
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
+        .scroll-top-btn, .floating-tg-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; z-index: 998; transition: all 0.3s ease; }
+        .scroll-top-btn { right: 25px; bottom: 25px; background: var(--accent); color: var(--bg-color); display: none; }
+        .scroll-top-btn.visible { display: flex; }
+        .floating-tg-btn { left: 25px; bottom: 25px; background: #229ED9; color: #fff; animation: pulse-telegram 2.5s infinite; }
+        @keyframes pulse-telegram { 0% { box-shadow: 0 0 0 0 rgba(34, 158, 217, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 158, 217, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 158, 217, 0); } }
     </style>
 </head>
 <body>
+<div class="container">
 
-    <div class="glow"></div>
-
-    <div class="container">
+    <header>
         <h1>amirvm</h1>
-        
-        <p class="subtitle">اینترنت آزاد</p>
+        <div class="subtitle">سریع • امن • بدون محدودیت</div>
+    </header>
 
-        <a href="https://amirvmir.github.io/sing-box.html" class="btn-singbox">
-            <svg class="icon-box" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 2L2 7l10 5 10-5-10-5zm0 9l2.5-1.25L12 8.5l-2.5 1.25L12 11zm0 2.5l-5-2.5-5 2.5L12 22l10-8.5-5-2.5-5 2.5z"/>
-            </svg>
-            کانفیگ Sing-box
-        </a>
-
-        <div class="footer">
-            <span>پشتیبانی تلگرام:</span>
-            <a href="https://t.me/amirvm_ir" target="_blank">amirvm_ir</a>
-        </div>
+    <div class="card">
+        <div class="section-title"><h2><i class="fab fa-telegram-plane" style="margin-left: 8px;"></i>اخبار و آپدیت‌های لحظه‌ای</h2></div>
+        <div id="telegram-posts" class="telegram-posts"><p style="width:100%; text-align:center; color:var(--text-mute);">در حال بارگذاری اخبار...</p></div>
     </div>
 
+    <div class="link-grid">
+        <div id="smart-config-btn" class="action-btn v2ray-btn" data-link="https://raw.githubusercontent.com/amirvmir/SVM/refs/heads/main/subscriptions/xray/normal/vless" role="button" tabindex="0">
+            <span class="new-badge">جدید</span>
+            <i class="fas fa-link"></i>
+            <span>کانفیگ هوشمند V2Ray</span>
+            <small>هر ۳ ساعت بروز رسانی</small>
+        </div>
+
+        <a href="https://www.amirvmir.github.io/sing-box.html" target="_blank" class="action-btn v2ray-btn">
+            <i class="fas fa-cogs"></i>
+            <span>Sing-Box</span>
+            <small>به صفحه Sing-Box برو</small>
+        </a>
+    </div>
+
+</div>
+
+<a href="#" class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا"><i class="fas fa-angle-double-up"></i></a>
+<a href="https://t.me/amirvm_ir" target="_blank" rel="noopener noreferrer" class="floating-tg-btn" title="کانال تلگرام"><i class="fab fa-telegram-plane"></i></a>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Scroll to top
+    const scrollTopBtn = document.getElementById('scrollTopBtn');
+    window.onscroll = () => { scrollTopBtn.classList.toggle('visible', window.scrollY > 300); };
+    scrollTopBtn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
+
+    // Copy smart config
+    const smartConfigBtn = document.getElementById('smart-config-btn');
+    smartConfigBtn.addEventListener('click', () => {
+        navigator.clipboard.writeText(smartConfigBtn.dataset.link).then(() => alert('لینک با موفقیت کپی شد!'));
+    });
+
+    // بارگذاری اخبار تلگرام
+    const postsContainer = document.getElementById('telegram-posts');
+    if(postsContainer) {
+        fetch('https://api.telegram.org/bot<8476367811:AAH8b8IDAzVcxuYV7qVH6VSlhP-fRInlh-U>/getUpdates') // ⚠ اینجا نیاز به ربات دارید
+            .then(res => res.json())
+            .then(data => {
+                postsContainer.innerHTML = '';
+                data.result.forEach(msg => {
+                    if(msg.message && msg.message.text){
+                        const div = document.createElement('div');
+                        div.className = 'telegram-post';
+                        div.innerHTML = `<p>${msg.message.text}</p>`;
+                        postsContainer.appendChild(div);
+                    }
+                });
+            }).catch(e => { postsContainer.innerHTML = `<p style="color:red;">خطا در بارگذاری اخبار</p>`; });
+    }
+});
+</script>
 </body>
 </html>
