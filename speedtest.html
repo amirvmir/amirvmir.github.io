@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+<meta charset="UTF-8">
+<title>amirvm</title>
+
+<style>
+html,body{
+    margin:0;
+    width:100%;
+    height:100%;
+    background:#000;
+}
+#frame{
+    width:100%;
+    height:100%;
+    border:none;
+}
+.loading{
+    position:fixed;
+    inset:0;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    color:#aaa;
+    font-family:sans-serif;
+    font-size:14px;
+}
+</style>
+</head>
+<body>
+
+<div class="loading" id="loading">در حال بارگذاری...</div>
+
+<script>
+/*
+  آدرس واقعی به‌صورت تکه‌تکه و معکوس
+  (تو HTML چیزی واضح دیده نمیشه)
+*/
+const parts = [
+  "php.tsetdeeps/",
+  "gro.tsohydluoc.",
+  "nez kot.",
+  "www//:sptth"
+];
+
+/* بازسازی آدرس */
+const url = parts.reverse().join("").split("").reverse().join("");
+
+/* ساخت iframe */
+const iframe = document.createElement("iframe");
+iframe.id = "frame";
+iframe.src = url;
+
+iframe.onload = () => {
+    document.getElementById("loading").remove();
+};
+
+document.body.appendChild(iframe);
+</script>
+
+</body>
+</html>
