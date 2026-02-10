@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>amirvm proxy || پروکسی</title>
+    <title>amirvm proxy || دریافت آنلاین</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <style>
@@ -36,6 +36,7 @@
             background: rgba(255,255,255,0.1);
             border: 1px solid rgba(255,255,255,0.2);
             transition: all 0.2s;
+            cursor: pointer;
         }
         
         .btn-copy:hover {
@@ -54,23 +55,22 @@
             0%, 100% { opacity: 1; }
             50% { opacity: 0.5; }
         }
-        
-        .input-field {
-            background: rgba(255,255,255,0.05);
-            border: 1px solid rgba(255,255,255,0.2);
-            transition: all 0.3s;
+
+        /* لودینگ */
+        .loader {
+            border: 3px solid rgba(255,255,255,0.1);
+            border-top: 3px solid #fff;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            animation: spin 1s linear infinite;
+            margin: 50px auto;
         }
-        
-        .input-field:focus {
-            border-color: rgba(255,255,255,0.5);
-            background: rgba(255,255,255,0.08);
-            outline: none;
-        }
+        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
     </style>
 </head>
 <body class="min-h-screen text-white">
 
-    <!-- Header -->
     <header class="border-b border-gray-800 bg-black/50 backdrop-blur-md sticky top-0 z-50">
         <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
             <div class="flex items-center gap-3">
@@ -79,194 +79,156 @@
                 </div>
                 <div>
                     <h1 class="text-xl font-bold tracking-wider text-white">amirvm proxy</h1>
-                    <p class="text-xs text-gray-500">پروکسی تلگرام</p>
+                    <p class="text-xs text-gray-500">پروکسی یاب خودکار</p>
                 </div>
             </div>
             <div class="flex items-center gap-2 text-sm text-gray-400">
-                <span class="status-dot w-2 h-2 bg-green-500 rounded-full"></span>
-                <span>آنلاین</span>
+                <button onclick="fetchProxies()" class="bg-gray-800 hover:bg-gray-700 px-3 py-1 rounded transition text-xs border border-gray-700">
+                    <i class="fas fa-sync-alt mr-1"></i> بروزرسانی
+                </button>
             </div>
         </div>
     </header>
 
     <main class="max-w-6xl mx-auto px-4 py-8">
         
-        <!-- Info Section -->
         <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold mb-3 text-white">پروکسی‌های MTProto</h2>
+            <h2 class="text-3xl font-bold mb-3 text-white">پروکسی‌های زنده MTProto</h2>
             <p class="text-gray-400 max-w-2xl mx-auto leading-relaxed">
-                برای اتصال به تلگرام از پروکسی‌های زیر استفاده کنید. روی دکمه کپی کلیک کنید یا لینک را دستی وارد کنید.
+                این لیست به‌صورت خودکار از کانال ProxyMTProto دریافت می‌شود.
             </p>
         </div>
 
-        <!-- Proxy Cards Grid -->
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
-            
-            <!-- Proxy Card 1 -->
-            <div class="proxy-card rounded-2xl p-6 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gray-800 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 bg-green-500 rounded-full status-dot"></span>
-                            <span class="text-sm font-semibold text-gray-300">پروکسی ۱</span>
-                        </div>
-                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">MTProto</span>
-                    </div>
-                    
-                    <div class="bg-black/30 rounded-lg p-3 mb-4 font-mono text-xs text-gray-400 break-all border border-gray-800" id="proxy1">
-                        https://t.me/proxy?server=example.com&port=443&secret=ee...
-                    </div>
-                    
-                    <div class="flex gap-2">
-                        <button onclick="copyProxy('proxy1')" class="btn-copy flex-1 py-2.5 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                            <i class="fas fa-copy"></i>
-                            <span>کپی لینک</span>
-                        </button>
-                        <a href="#" onclick="openProxy('proxy1')" class="btn-copy py-2.5 px-4 rounded-lg text-sm" title="باز کردن در تلگرام">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
+        <div id="proxy-container" class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
             </div>
-
-            <!-- Proxy Card 2 -->
-            <div class="proxy-card rounded-2xl p-6 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gray-800 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 bg-green-500 rounded-full status-dot"></span>
-                            <span class="text-sm font-semibold text-gray-300">پروکسی ۲</span>
-                        </div>
-                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">MTProto</span>
-                    </div>
-                    
-                    <div class="bg-black/30 rounded-lg p-3 mb-4 font-mono text-xs text-gray-400 break-all border border-gray-800" id="proxy2">
-                        https://t.me/proxy?server=example2.com&port=443&secret=dd...
-                    </div>
-                    
-                    <div class="flex gap-2">
-                        <button onclick="copyProxy('proxy2')" class="btn-copy flex-1 py-2.5 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                            <i class="fas fa-copy"></i>
-                            <span>کپی لینک</span>
-                        </button>
-                        <a href="#" onclick="openProxy('proxy2')" class="btn-copy py-2.5 px-4 rounded-lg text-sm" title="باز کردن در تلگرام">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Proxy Card 3 -->
-            <div class="proxy-card rounded-2xl p-6 relative overflow-hidden">
-                <div class="absolute top-0 right-0 w-32 h-32 bg-gray-800 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
-                
-                <div class="relative z-10">
-                    <div class="flex items-center justify-between mb-4">
-                        <div class="flex items-center gap-2">
-                            <span class="w-3 h-3 bg-yellow-500 rounded-full status-dot"></span>
-                            <span class="text-sm font-semibold text-gray-300">پروکسی ۳</span>
-                        </div>
-                        <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">MTProto</span>
-                    </div>
-                    
-                    <div class="bg-black/30 rounded-lg p-3 mb-4 font-mono text-xs text-gray-400 break-all border border-gray-800" id="proxy3">
-                        https://t.me/proxy?server=example3.com&port=443&secret=aa...
-                    </div>
-                    
-                    <div class="flex gap-2">
-                        <button onclick="copyProxy('proxy3')" class="btn-copy flex-1 py-2.5 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
-                            <i class="fas fa-copy"></i>
-                            <span>کپی لینک</span>
-                        </button>
-                        <a href="#" onclick="openProxy('proxy3')" class="btn-copy py-2.5 px-4 rounded-lg text-sm" title="باز کردن در تلگرام">
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-
-        <!-- Manual Input Section -->
-        <div class="glass-card rounded-2xl p-8 max-w-2xl mx-auto">
-            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
-                <i class="fas fa-keyboard text-gray-400"></i>
-                <span>ورود دستی پروکسی</span>
-            </h3>
-            
-            <div class="space-y-4">
-                <div>
-                    <label class="block text-sm text-gray-400 mb-2">لینک پروکسی MTProto</label>
-                    <input type="text" id="manual-proxy" placeholder="https://t.me/proxy?server=...&port=...&secret=..." 
-                           class="input-field w-full rounded-lg px-4 py-3 text-sm text-white placeholder-gray-600 font-mono">
-                </div>
-                
-                <div class="grid grid-cols-3 gap-4">
-                    <div>
-                        <label class="block text-xs text-gray-500 mb-1">Server</label>
-                        <input type="text" id="server-input" placeholder="example.com" 
-                               class="input-field w-full rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-gray-500 mb-1">Port</label>
-                        <input type="text" id="port-input" placeholder="443" 
-                               class="input-field w-full rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600">
-                    </div>
-                    <div>
-                        <label class="block text-xs text-gray-500 mb-1">Secret</label>
-                        <input type="text" id="secret-input" placeholder="ee..." 
-                               class="input-field w-full rounded-lg px-3 py-2 text-sm text-white placeholder-gray-600">
-                    </div>
-                </div>
-                
-                <button onclick="connectManual()" class="w-full bg-white text-black font-bold py-3 rounded-lg hover:bg-gray-200 transition-all duration-200 mt-4 flex items-center justify-center gap-2">
-                    <i class="fas fa-plug"></i>
-                    <span>اتصال به پروکسی</span>
-                </button>
-            </div>
-        </div>
-
-        <!-- Instructions -->
-        <div class="mt-12 glass-card rounded-2xl p-6 max-w-2xl mx-auto">
-            <h4 class="font-bold mb-4 text-gray-300">راهنمای استفاده:</h4>
-            <ul class="space-y-2 text-sm text-gray-400">
-                <li class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>روی دکمه "کپی لینک" کلیک کنید تا لینک پروکسی کپی شود</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>در تلگرام، به Settings > Data and Storage > Proxy Settings بروید</span>
-                </li>
-                <li class="flex items-start gap-2">
-                    <i class="fas fa-check text-green-500 mt-1"></i>
-                    <span>گزینه Add Proxy را انتخاب کرده و لینک کپی شده را Paste کنید</span>
-                </li>
-            </ul>
-        </div>
+        
+        <div id="loading" class="loader"></div>
+        <div id="error-msg" class="text-center text-red-400 hidden"></div>
 
     </main>
 
-    <!-- Toast Notification -->
     <div id="toast" class="fixed bottom-4 left-1/2 transform -translate-x-1/2 bg-white text-black px-6 py-3 rounded-lg shadow-2xl opacity-0 transition-opacity duration-300 pointer-events-none z-50 font-medium flex items-center gap-2">
         <i class="fas fa-check-circle text-green-600"></i>
         <span id="toast-message">کپی شد!</span>
     </div>
 
     <script>
-        // Copy proxy link to clipboard
-        function copyProxy(elementId) {
-            const proxyText = document.getElementById(elementId).textContent.trim();
-            navigator.clipboard.writeText(proxyText).then(() => {
+        // کانفیگ دریافت اطلاعات
+        const channelUrl = 'https://t.me/s/ProxyMTProto';
+        const corsProxy = 'https://api.allorigins.win/get?url=' + encodeURIComponent(channelUrl);
+        const container = document.getElementById('proxy-container');
+        const loader = document.getElementById('loading');
+        const errorMsg = document.getElementById('error-msg');
+
+        async function fetchProxies() {
+            // ریست کردن وضعیت
+            container.innerHTML = '';
+            loader.style.display = 'block';
+            errorMsg.classList.add('hidden');
+
+            try {
+                const response = await fetch(corsProxy);
+                const data = await response.json();
+                
+                if (!data.contents) throw new Error('محتوایی دریافت نشد');
+
+                // پارس کردن HTML تلگرام
+                const parser = new DOMParser();
+                const doc = parser.parseFromString(data.contents, 'text/html');
+                const links = doc.querySelectorAll('a[href*="t.me/proxy"]');
+
+                // فیلتر کردن لینک‌های تکراری و استخراج اطلاعات
+                const uniqueProxies = new Set();
+                const proxies = [];
+
+                // پیمایش از آخر به اول (برای جدیدترین‌ها)
+                for (let i = links.length - 1; i >= 0; i--) {
+                    let href = links[i].href;
+                    // تمیزکاری لینک (گاهی اوقات لینک‌های تلگرام دارای پارامترهای اضافی هستند)
+                    if(href.includes('&amp;')) href = href.replace(/&amp;/g, '&');
+                    
+                    if (!uniqueProxies.has(href)) {
+                        uniqueProxies.add(href);
+                        
+                        // استخراج پارامترها برای نمایش زیباتر
+                        try {
+                            const urlObj = new URL(href);
+                            const params = new URLSearchParams(urlObj.search);
+                            proxies.push({
+                                url: href,
+                                server: params.get('server'),
+                                port: params.get('port'),
+                                secret: params.get('secret')
+                            });
+                        } catch(e) { console.log('Bad URL', href); }
+                    }
+                    if (proxies.length >= 9) break; // نمایش حداکثر 9 پروکسی
+                }
+
+                renderProxies(proxies);
+
+            } catch (err) {
+                console.error(err);
+                loader.style.display = 'none';
+                errorMsg.innerText = 'خطا در دریافت پروکسی‌ها. لطفا فیلترشکن خود را بررسی کنید یا بعدا تلاش کنید.';
+                errorMsg.classList.remove('hidden');
+            }
+        }
+
+        function renderProxies(list) {
+            loader.style.display = 'none';
+            
+            if(list.length === 0) {
+                errorMsg.innerText = 'پروکسی جدیدی یافت نشد.';
+                errorMsg.classList.remove('hidden');
+                return;
+            }
+
+            list.forEach((proxy, index) => {
+                // کوتاه کردن سکرت برای نمایش
+                const shortSecret = proxy.secret ? proxy.secret.substring(0, 10) + '...' : 'Hidden';
+                
+                const card = document.createElement('div');
+                card.className = 'proxy-card rounded-2xl p-6 relative overflow-hidden fade-in';
+                card.innerHTML = `
+                    <div class="absolute top-0 right-0 w-32 h-32 bg-gray-800 rounded-full blur-3xl opacity-20 -mr-16 -mt-16"></div>
+                    <div class="relative z-10">
+                        <div class="flex items-center justify-between mb-4">
+                            <div class="flex items-center gap-2">
+                                <span class="w-3 h-3 bg-green-500 rounded-full status-dot"></span>
+                                <span class="text-sm font-semibold text-gray-300">سرور ${index + 1}</span>
+                            </div>
+                            <span class="text-xs bg-gray-800 px-2 py-1 rounded text-gray-400">${proxy.port}</span>
+                        </div>
+                        
+                        <div class="bg-black/30 rounded-lg p-3 mb-4 font-mono text-xs text-gray-400 break-all border border-gray-800 flex flex-col gap-1">
+                            <div><span class="text-gray-600">IP:</span> ${proxy.server}</div>
+                            <div><span class="text-gray-600">Secret:</span> ${shortSecret}</div>
+                        </div>
+                        
+                        <div class="flex gap-2">
+                            <button onclick="copyToClipboard('${proxy.url}')" class="btn-copy flex-1 py-2.5 px-4 rounded-lg text-sm font-medium flex items-center justify-center gap-2">
+                                <i class="fas fa-copy"></i>
+                                <span>کپی</span>
+                            </button>
+                            <a href="${proxy.url}" class="btn-copy py-2.5 px-4 rounded-lg text-sm flex items-center justify-center" title="اتصال سریع">
+                                <i class="fas fa-bolt"></i>
+                            </a>
+                        </div>
+                    </div>
+                `;
+                container.appendChild(card);
+            });
+        }
+
+        // تابع کپی (بدون نیاز به ID المنت)
+        function copyToClipboard(text) {
+            navigator.clipboard.writeText(text).then(() => {
                 showToast('لینک پروکسی کپی شد!');
             }).catch(() => {
-                // Fallback for older browsers
+                // روش جایگزین برای مرورگرهای قدیمی
                 const textArea = document.createElement("textarea");
-                textArea.value = proxyText;
+                textArea.value = text;
                 document.body.appendChild(textArea);
                 textArea.select();
                 document.execCommand("copy");
@@ -275,13 +237,6 @@
             });
         }
 
-        // Open proxy in Telegram
-        function openProxy(elementId) {
-            const proxyText = document.getElementById(elementId).textContent.trim();
-            window.location.href = proxyText;
-        }
-
-        // Show toast notification
         function showToast(message) {
             const toast = document.getElementById('toast');
             const toastMessage = document.getElementById('toast-message');
@@ -292,40 +247,9 @@
             }, 3000);
         }
 
-        // Connect manual proxy
-        function connectManual() {
-            const link = document.getElementById('manual-proxy').value;
-            const server = document.getElementById('server-input').value;
-            const port = document.getElementById('port-input').value;
-            const secret = document.getElementById('secret-input').value;
-            
-            let proxyUrl = '';
-            
-            if (link) {
-                proxyUrl = link;
-            } else if (server && port && secret) {
-                proxyUrl = `https://t.me/proxy?server=${server}&port=${port}&secret=${secret}`;
-            } else {
-                showToast('لطفاً اطلاعات پروکسی را کامل وارد کنید');
-                return;
-            }
-            
-            window.location.href = proxyUrl;
-        }
+        // اجرا هنگام لود صفحه
+        fetchProxies();
 
-        // Parse manual input link to fill fields
-        document.getElementById('manual-proxy').addEventListener('input', function(e) {
-            const url = e.target.value;
-            if (url.includes('t.me/proxy')) {
-                try {
-                    const urlObj = new URL(url);
-                    const params = new URLSearchParams(urlObj.search);
-                    document.getElementById('server-input').value = params.get('server') || '';
-                    document.getElementById('port-input').value = params.get('port') || '';
-                    document.getElementById('secret-input').value = params.get('secret') || '';
-                } catch(e) {}
-            }
-        });
     </script>
 </body>
 </html>
