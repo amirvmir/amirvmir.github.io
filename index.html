@@ -45,17 +45,12 @@
         .action-btn small { font-size: 0.7rem; color: var(--text-mute); }
         .new-badge { position: absolute; top: 8px; left: 8px; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 900; background: var(--accent); color: #000; }
 
-        .telegram-posts { display: flex; gap: 12px; overflow-x: auto; padding-bottom: 10px; scroll-behavior: smooth; -ms-overflow-style: none; scrollbar-width: none; }
-        .telegram-posts::-webkit-scrollbar { display: none; }
-        .telegram-post { flex: 0 0 280px; background: rgba(255,255,255,0.03); border: 1px solid var(--glass-border); border-radius: 18px; padding: 15px; font-size: 0.85rem; color: var(--text-mute); line-height: 1.6; transition: background 0.3s; }
-        .telegram-post:hover { background: rgba(255,255,255,0.08); }
-        .telegram-post a { color: var(--accent); text-decoration: none; font-weight: bold; }
+        .telegram-widget-wrapper { border-radius:18px; overflow:hidden; }
 
         .scroll-top-btn, .floating-tg-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; z-index: 998; transition: all 0.3s ease; }
         .scroll-top-btn { right: 25px; bottom: 25px; background: var(--accent); color: var(--bg-color); display: none; }
         .scroll-top-btn.visible { display: flex; }
-        .floating-tg-btn { left: 25px; bottom: 25px; background: #229ED9; color: #fff; animation: pulse-telegram 2.5s infinite; }
-        @keyframes pulse-telegram { 0% { box-shadow: 0 0 0 0 rgba(34, 158, 217, 0.7); } 70% { box-shadow: 0 0 0 10px rgba(34, 158, 217, 0); } 100% { box-shadow: 0 0 0 0 rgba(34, 158, 217, 0); } }
+        .floating-tg-btn { left: 25px; bottom: 25px; background: #229ED9; color: #fff; }
     </style>
 </head>
 <body>
@@ -68,7 +63,14 @@
 
     <div class="card">
         <div class="section-title"><h2><i class="fab fa-telegram-plane" style="margin-left: 8px;"></i>اخبار و آپدیت‌های لحظه‌ای</h2></div>
-        <div id="telegram-posts" class="telegram-posts"><p style="width:100%; text-align:center; color:var(--text-mute);">در حال بارگذاری اخبار...</p></div>
+        <div class="telegram-widget-wrapper">
+            <script async src="https://telegram.org/js/telegram-widget.js?22"
+                    data-telegram-channel="amirvm_ir"
+                    data-width="100%"
+                    data-height="500"
+                    data-dark="1">
+            </script>
+        </div>
     </div>
 
     <div class="link-grid">
@@ -93,34 +95,14 @@
 
 <script>
 document.addEventListener('DOMContentLoaded', () => {
-    // Scroll to top
     const scrollTopBtn = document.getElementById('scrollTopBtn');
     window.onscroll = () => { scrollTopBtn.classList.toggle('visible', window.scrollY > 300); };
     scrollTopBtn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
 
-    // Copy smart config
     const smartConfigBtn = document.getElementById('smart-config-btn');
     smartConfigBtn.addEventListener('click', () => {
         navigator.clipboard.writeText(smartConfigBtn.dataset.link).then(() => alert('لینک با موفقیت کپی شد!'));
     });
-
-    // بارگذاری اخبار تلگرام
-    const postsContainer = document.getElementById('telegram-posts');
-    if(postsContainer) {
-        fetch('https://api.telegram.org/bot<8476367811:AAH8b8IDAzVcxuYV7qVH6VSlhP-fRInlh-U>/getUpdates') // ⚠ اینجا نیاز به ربات دارید
-            .then(res => res.json())
-            .then(data => {
-                postsContainer.innerHTML = '';
-                data.result.forEach(msg => {
-                    if(msg.message && msg.message.text){
-                        const div = document.createElement('div');
-                        div.className = 'telegram-post';
-                        div.innerHTML = `<p>${msg.message.text}</p>`;
-                        postsContainer.appendChild(div);
-                    }
-                });
-            }).catch(e => { postsContainer.innerHTML = `<p style="color:red;">خطا در بارگذاری اخبار</p>`; });
-    }
 });
 </script>
 </body>
