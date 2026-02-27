@@ -3,107 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>amirvm | نسل جدید اینترنت آزاد</title>
-    <meta name="description" content="پنل اختصاصی amirvm - کانفیگ‌های پرسرعت V2Ray, Sing-Box">
-
+    <title>amirvm || دنیای تکنولوژی و اینترنت آزاد</title>
+    
     <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
     <style>
         :root {
-            --bg-color: #1e1e1e;
+            --bg-deep: #050510;
             --primary: #ffffff;
-            --accent: #b0b0b0;
-            --glass: rgba(255, 255, 255, 0.05);
-            --glass-border: rgba(255, 255, 255, 0.1);
+            --accent: #6366f1;
+            --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
             --text-main: #f0f0f0;
             --text-mute: #aaaaaa;
         }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; }
-        body { margin: 0; font-family: 'Vazirmatn', sans-serif; background-color: var(--bg-color); color: var(--text-main); min-height: 100vh; display: flex; justify-content: center; overflow-x: hidden; }
-        .container { width: 100%; max-width: 500px; padding: 20px; display: flex; flex-direction: column; gap: 20px; padding-bottom: 80px; }
+        
+        body { 
+            font-family: 'Vazirmatn', sans-serif; 
+            background-color: var(--bg-deep); 
+            color: var(--text-main); 
+            min-height: 100vh;
+            line-height: 1.6;
+            background: radial-gradient(circle at 50% 0%, rgba(99, 102, 241, 0.15) 0%, transparent 50%), var(--bg-deep);
+        }
 
-        header { text-align: center; margin-top: 20px; }
-        h1 { font-size: 1.8rem; font-weight: 900; color: var(--primary); }
-        .subtitle { font-size: 0.9rem; color: var(--accent); margin-top: 5px; }
+        .container { width: 100%; max-width: 600px; margin: 0 auto; padding: 20px 20px 100px 20px; }
 
-        .card { background: var(--glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 24px; padding: 20px; }
-        .section-title { font-size: 1rem; color: var(--text-mute); margin-bottom: 12px; padding-right: 10px; border-right: 3px solid var(--primary); display: flex; justify-content: space-between; align-items: center; }
-        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+        /* Header */
+        header { text-align: center; margin: 40px 0; }
+        h1 { font-size: 3rem; font-weight: 900; letter-spacing: -2px; background: linear-gradient(to bottom, #fff, #666); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .subtitle { font-size: 1rem; color: var(--accent); font-weight: 500; margin-top: -10px; }
 
+        /* Stats Card */
+        .stats-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 25px; }
+        .stat-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 20px; border-radius: 24px; text-align: center; backdrop-filter: blur(10px); }
+        .stat-card span { display: block; font-size: 1.5rem; font-weight: 900; }
+        .stat-card small { color: var(--text-mute); font-size: 0.75rem; }
+
+        /* General Card */
+        .card { background: var(--glass); backdrop-filter: blur(16px); border: 1px solid var(--glass-border); border-radius: 28px; padding: 20px; margin-bottom: 20px; }
+        .section-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 15px; display: flex; align-items: center; gap: 10px; color: var(--primary); }
+        .section-title i { color: var(--accent); }
+
+        /* Action Buttons (از سایت گیت‌هاب شما) */
+        .link-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
         .action-btn {
             background: var(--glass);
             border: 1px solid var(--glass-border);
-            border-radius: 18px;
-            padding: 15px;
+            border-radius: 22px;
+            padding: 20px 15px;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             gap: 8px; cursor: pointer; text-decoration: none; color: var(--text-main);
-            position: relative; overflow: hidden; transition: all 0.2s;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
         }
-        .action-btn:active { transform: scale(0.95); }
-        .action-btn i { font-size: 1.4rem; color: var(--text-mute); margin-bottom: 2px; }
-        .action-btn span { font-size: 0.9rem; font-weight: 700; }
-        .action-btn small { font-size: 0.7rem; color: var(--text-mute); }
-        .new-badge { position: absolute; top: 8px; left: 8px; padding: 2px 8px; border-radius: 10px; font-size: 0.7rem; font-weight: 900; background: var(--accent); color: #000; }
+        .action-btn:hover { background: rgba(255,255,255,0.07); transform: translateY(-5px); border-color: var(--accent); }
+        .action-btn i { font-size: 1.6rem; color: var(--accent); }
+        .action-btn span { font-size: 0.95rem; font-weight: 700; }
+        .action-btn small { font-size: 0.7rem; color: var(--text-mute); text-align: center; }
+        .new-badge { position: absolute; top: 10px; left: 10px; background: var(--accent); color: #fff; font-size: 0.6rem; padding: 2px 8px; border-radius: 8px; font-weight: 900; }
 
-        .telegram-widget-wrapper { border-radius:18px; overflow:hidden; }
+        /* Telegram Feed Box */
+        .telegram-widget-wrapper { border-radius: 18px; overflow: hidden; background: rgba(0,0,0,0.2); min-height: 200px; }
 
-        .scroll-top-btn, .floating-tg-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.6rem; text-decoration: none; z-index: 998; transition: all 0.3s ease; }
-        .scroll-top-btn { right: 25px; bottom: 25px; background: var(--accent); color: var(--bg-color); display: none; }
-        .scroll-top-btn.visible { display: flex; }
-        .floating-tg-btn { left: 25px; bottom: 25px; background: #229ED9; color: #fff; }
+        /* Floating Elements */
+        .floating-btn { position: fixed; width: 55px; height: 55px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.4rem; z-index: 999; transition: 0.3s; }
+        .scroll-top { right: 20px; bottom: 20px; background: #fff; color: #000; opacity: 0; visibility: hidden; }
+        .scroll-top.visible { opacity: 1; visibility: visible; }
+        .tg-float { left: 20px; bottom: 20px; background: #229ED9; color: #fff; }
+
+        /* Footer */
+        footer { text-align: center; margin-top: 40px; font-size: 0.8rem; color: var(--text-mute); }
     </style>
 </head>
 <body>
-<div class="container">
 
+<div class="container">
     <header>
         <h1>amirvm</h1>
-        <div class="subtitle">سریع • امن • بدون محدودیت</div>
+        <div class="subtitle">دنیای تکنولوژی • اینترنت آزاد</div>
     </header>
 
+    <div class="stats-grid">
+        <div class="stat-card">
+            <span id="member-count">25.4K</span>
+            <small>عضو کانال</small>
+        </div>
+        <div class="stat-card">
+            <span>24/7</span>
+            <small>پشتیبانی ادمین</small>
+        </div>
+    </div>
+
+    <div class="card" id="vpn">
+        <div class="section-title">
+            <i class="fas fa-shield-halved"></i>
+            <h2>بخش VPN و اینترنت آزاد</h2>
+        </div>
+        <div class="link-grid">
+            <div id="copy-v2ray" class="action-btn" data-link="https://raw.githubusercontent.com/amirvmir/SVM/refs/heads/main/subscriptions/xray/normal/vless">
+                <span class="new-badge">جدید</span>
+                <i class="fas fa-link"></i>
+                <span>لینک V2Ray</span>
+                <small>کپی لینک هوشمند</small>
+            </div>
+
+            <a href="https://www.amirvmir.github.io/sing-box.html" target="_blank" class="action-btn">
+                <i class="fas fa-cube"></i>
+                <span>Sing-Box</span>
+                <small>پنل اختصاصی</small>
+            </a>
+        </div>
+    </div>
+
     <div class="card">
-        <div class="section-title"><h2><i class="fab fa-telegram-plane" style="margin-left: 8px;"></i>اخبار و آپدیت‌های لحظه‌ای</h2></div>
-        <div class="telegram-widget-wrapper">
+        <div class="section-title">
+            <i class="fab fa-telegram"></i>
+            <h2>آخرین آپدیت‌ها</h2>
+        </div>
+        <div class="telegram-widget-wrapper" id="tg-feed">
             <script async src="https://telegram.org/js/telegram-widget.js?22"
-                    data-telegram-channel="amirvm_ir"
+                    data-telegram-post="amirvm_ir/latest"
                     data-width="100%"
-                    data-height="500"
                     data-dark="1">
             </script>
         </div>
     </div>
 
-    <div class="link-grid">
-        <div id="smart-config-btn" class="action-btn v2ray-btn" data-link="https://raw.githubusercontent.com/amirvmir/SVM/refs/heads/main/subscriptions/xray/normal/vless" role="button" tabindex="0">
-            <span class="new-badge">جدید</span>
-            <i class="fas fa-link"></i>
-            <span>کانفیگ هوشمند V2Ray</span>
-            <small>هر ۳ ساعت بروز رسانی</small>
-        </div>
-
-        <a href="https://www.amirvmir.github.io/sing-box.html" target="_blank" class="action-btn v2ray-btn">
-            <i class="fas fa-cogs"></i>
-            <span>Sing-Box</span>
-            <small>به صفحه Sing-Box برو</small>
-        </a>
-    </div>
-
+    <footer>
+        <p>تمامی حقوق برای amirvm محفوظ است</p>
+        <p style="margin-top: 5px;">ادمین: @AmirvmIR</p>
+    </footer>
 </div>
 
-<a href="#" class="scroll-top-btn" id="scrollTopBtn" title="بازگشت به بالا"><i class="fas fa-angle-double-up"></i></a>
-<a href="https://t.me/amirvm_ir" target="_blank" rel="noopener noreferrer" class="floating-tg-btn" title="کانال تلگرام"><i class="fab fa-telegram-plane"></i></a>
+<a href="#" class="floating-btn scroll-top" id="scrollTop"><i class="fas fa-arrow-up"></i></a>
+<a href="https://t.me/amirvm_ir" target="_blank" class="floating-btn tg-float"><i class="fab fa-telegram-plane"></i></a>
 
 <script>
-document.addEventListener('DOMContentLoaded', () => {
-    const scrollTopBtn = document.getElementById('scrollTopBtn');
-    window.onscroll = () => { scrollTopBtn.classList.toggle('visible', window.scrollY > 300); };
-    scrollTopBtn.addEventListener('click', e => { e.preventDefault(); window.scrollTo({top:0, behavior:'smooth'}); });
-
-    const smartConfigBtn = document.getElementById('smart-config-btn');
-    smartConfigBtn.addEventListener('click', () => {
-        navigator.clipboard.writeText(smartConfigBtn.dataset.link).then(() => alert('لینک با موفقیت کپی شد!'));
+    // عملکرد کپی لینک V2Ray (دقیقاً مشابه سایت شما)
+    const copyBtn = document.getElementById('copy-v2ray');
+    copyBtn.addEventListener('click', () => {
+        const link = copyBtn.getAttribute('data-link');
+        navigator.clipboard.writeText(link).then(() => {
+            const originalText = copyBtn.querySelector('span').innerText;
+            copyBtn.querySelector('span').innerText = "کپی شد!";
+            copyBtn.style.borderColor = "#4ade80";
+            setTimeout(() => {
+                copyBtn.querySelector('span').innerText = originalText;
+                copyBtn.style.borderColor = "";
+            }, 2000);
+        });
     });
-});
+
+    // اسکرول به بالا
+    const scrollTop = document.getElementById('scrollTop');
+    window.onscroll = () => {
+        if (window.scrollY > 400) scrollTop.classList.add('visible');
+        else scrollTop.classList.remove('visible');
+    };
+    scrollTop.onclick = (e) => {
+        e.preventDefault();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
+
+    // دریافت خودکار آمار (اختیاری - اگر فیلترشکن کاربر روشن باشد)
+    async function getTelegramStats() {
+        try {
+            const response = await fetch('https://api.allorigins.win/get?url=' + encodeURIComponent('https://t.me/s/amirvm_ir'));
+            const data = await response.json();
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(data.contents, 'text/html');
+            const members = doc.querySelector('.tgme_channel_info_counter .counter_value')?.innerText;
+            if(members) document.getElementById('member-count').innerText = members;
+        } catch(e) { console.log("Stats error"); }
+    }
+    window.onload = getTelegramStats;
 </script>
+
 </body>
 </html>
